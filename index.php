@@ -1,7 +1,7 @@
 <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
-        $package_query = pg_fetch_array(pg_query($conn, "select package_query from url_assainment;"));
-        $single_query = pg_query($conn, "select single_query from url_assainment;");
+        $package_query = pg_fetch_array(pg_query($conn, "select package_query from url_assainment;"), NULL, PGSQL_ASSOC);
+        $single_query = pg_fetch_array(pg_query($conn, "select single_query from url_assainment;"), NULL, PGSQL_ASSOC);
  ?>
 <html lang="en">
 <head>
