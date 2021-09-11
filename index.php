@@ -75,7 +75,7 @@
                     if(package_query.slice(-1)[0] != "first,endpoint"){
                         single_query.push(package_query.slice(-1)[0].split(",")[0]);
                         var pick_url = package_query.slice(-1)[0].split(",")[1];
-                        var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?";
+                        var context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?";
                         package_query.pop();
                         downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
                     }else{
@@ -84,7 +84,7 @@
                 }else{
                     var index = Math.floor(Math.random() * single_query.length);
                     var pick_url = single_query[index];
-                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?";
+                    var context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?";
                     single_query.splice(index, 1);
                     downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
                 }
@@ -92,7 +92,7 @@
                 if(package_query.slice(-1)[0] != "first,endpoint"){
                     var index = Math.floor(Math.random() * package_query.length);
                     var pick_url = package_query[index].split(",");
-                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[0]+"-home.html? \n https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[1]+"-home.html?";
+                    var context = "2単位分の実験参加用のURLです。以下のURLをそれぞれコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[0]+"-home.html? \n\n 2: https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[1]+"-home.html?";
                     package_query.splice(index, 1);
                     downloadAsTextFile("実験アクセス用URL記述ファイル-2単位", context);
                 }else{
