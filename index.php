@@ -1,7 +1,7 @@
 <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
-        $package_query = pg_query($conn, "select package_query from url_assainment;");
-        $single_query = pg_query($conn, "select single_query from url_assainment;");
+        $package_query = pg_query($conn, "select Package_query from url_assignment;");
+        $single_query = pg_query($conn, "select Single_query from url_assignment;");
  ?>
 <html lang="en">
 <head>
@@ -25,7 +25,7 @@
     <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="3">電話のかけ方</label>
     <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="4">敬語</label>
     <br><br>
-    <button onclick="URLAssainment()" style="display: block;">URL発行</button>
+    <button id="url_assignment_button" onclick="URLassignment()" style="display: none;">URL発行</button>
     <p id="result"></p>
 
     <script type="text/javascript">
@@ -52,7 +52,7 @@
         elements1.addEventListener('change', putRatio);
         elements2.addEventListener('change', putRatio);
 
-        function URLAssainment(){
+        function URLassignment(){
            var package_query = "<?php while ($row = pg_fetch_row($package_query)) {
                                        echo $row[0];
                                      }
