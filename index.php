@@ -12,8 +12,13 @@
     <hr>
     <br>
     <p>取り組むことができる単位数を選択してください。</p>
-    <input type="radio" name="howmany" value="1"> 1単位
-    <input type="radio" name="howmany" value="2"> 2単位
+    <label><input type="radio" name="howmany" value="1">1単位</label>
+    <label><input type="radio" name="howmany" value="2">2単位</label>
+    <hr id="border_check_1" style="display: none;">
+    <label><input type="radio" name="whattype" value="A" style="display: none;">A</label>
+    <label><input type="radio" name="whattype" value="B" style="display: none;">B</label>
+    <label><input type="radio" name="whattype" value="C" style="display: none;">C</label>
+    <label><input type="radio" name="whattype" value="D" style="display: none;">D</label>
     <br><br>
     <button>URL発行</button>
 
@@ -22,5 +27,20 @@
         $result = pg_query($conn, "select * from url_assainment;");
         var_dump(pg_fetch_all($result));
     ?>
+
+    <script type="text/javascript">
+        function putRatio(){
+            let elements = document.getElementsByName('howmany');
+            if (elements.item(0).checked){
+                document.getElementsById("border_check_1").style.display ="block";
+                document.getElementsByName('whattype').style.display ="block";
+            }else{
+                document.getElementsById("border_check_1").style.display ="none";
+                document.getElementsByName('whattype').style.display ="none";
+            }
+        }
+        let elements1 = document.getElementsByName('howmany');
+        elements1.addEventListener('change', putRatio);
+    </script>
 </body>
 </html>
