@@ -51,7 +51,7 @@
 
         function URLAssainment(){
            var  js_test = "<?php while ($row = pg_fetch_row($package_query)) {
-                                  echo '$row[0]';
+                                  echo $row[0];
                                 }
                            ?>"
         }
