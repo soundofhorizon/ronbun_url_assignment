@@ -85,6 +85,9 @@
 
             document.getElementById("url_assignment_button").style.display ="none";
             document.getElementById('result').innerHTML = "<p>URLを発行し、テキストファイルとしてダウンロードしました。\n マニュアルとテキストファイルを参考して実験を進めてください。</p>";
+
+            sleep(3000);
+            window.close();
         }
 
         function downloadAsTextFile( fileName, content ) {
@@ -102,6 +105,13 @@
 
             TEMP_ANCHOR.dispatchEvent( new MouseEvent( 'click' ) );
         };
+
+        function sleep(waitMsec) {
+          var startMsec = new Date();
+
+          // 指定ミリ秒間だけループさせる（CPUは常にビジー状態）
+          while (new Date() - startMsec < waitMsec);
+        }
     </script>
 </body>
 </html>
