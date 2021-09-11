@@ -16,9 +16,9 @@
     <label><input type="radio" name="howmany" value="2">2単位</label>
     <hr id="border_check_1" style="display: none;">
     <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A" style="display: none;">A</label>
-    <label><input type="radio" name="whattype" value="B" id="whattyperatio2" style="display: none;">B</label>
-    <label><input type="radio" name="whattype" value="C" id="whattyperatio3" style="display: none;">C</label>
-    <label><input type="radio" name="whattype" value="D" id="whattyperatio4" style="display: none;">D</label>
+    <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="B">B</label>
+    <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="C">C</label>
+    <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="D">D</label>
     <br><br>
     <button>URL発行</button>
 
@@ -34,9 +34,15 @@
             if (elements.item(0).checked){
                 document.getElementById("border_check_1").style.display ="block";
                 document.getElementById("whattyperatio1").style.display ="block";
+                document.getElementById("whattyperatio2").style.display ="block";
+                document.getElementById("whattyperatio3").style.display ="block";
+                document.getElementById("whattyperatio4").style.display ="block";
             }else{
                 document.getElementById("border_check_1").style.display ="none";
-                document.getElementsByName('whattype').style.display ="none";
+                document.getElementById("whattyperatio1").style.display ="none";
+                document.getElementById("whattyperatio2").style.display ="none";
+                document.getElementById("whattyperatio3").style.display ="none";
+                document.getElementById("whattyperatio4").style.display ="none";
             }
         }
         let elements1 = document.getElementById('onetime');
