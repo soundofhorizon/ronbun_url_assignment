@@ -70,7 +70,7 @@
 
            let howmanyunit = document.getElementsByName('howmany');
             if (howmanyunit.item(0).checked){
-                if(single_query.length == 0){
+                if(single_query.length == 1){
                     // unpack
                     single_query.push(package_query[-1][0]);
                     var pick_url = package_query[-1][1];
