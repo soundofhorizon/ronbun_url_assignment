@@ -1,6 +1,6 @@
 <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
-        $package_query = pg_query($conn, "select package_query from url_assainment;");
+        $package_query = pg_fetch_array(pg_query($conn, "select package_query from url_assainment;"));
         $single_query = pg_query($conn, "select single_query from url_assainment;");
  ?>
 <html lang="en">
@@ -50,7 +50,7 @@
         elements2.addEventListener('change', putRatio);
 
         function URLAssainment(){
-           var  js_test = <?php echo pg_fetch_array($package_query); ?>
+           var  js_test = <?php echo $package_query; ?>
         }
     </script>
 </body>
