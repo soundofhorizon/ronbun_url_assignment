@@ -50,10 +50,18 @@
         elements2.addEventListener('change', putRatio);
 
         function URLAssainment(){
-           var  js_test = "<?php while ($row = pg_fetch_row($package_query)) {
-                                  echo $row[0];
-                                }
-                           ?>"
+           var package_query = "<?php while ($row = pg_fetch_row($package_query)) {
+                                       echo $row[0];
+                                     }
+                                ?>"
+
+           var single_query = "<?php while ($row = pg_fetch_row($single_query)) {
+                                       echo $row[0];
+                                     }
+                                ?>"
+
+           package_query = package_query.replace("{{", "").replace("}}", "").split("},{");
+           console.log(package_query);
         }
     </script>
 </body>
