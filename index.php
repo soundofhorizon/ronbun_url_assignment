@@ -81,6 +81,9 @@
                    alert("実験の残り数が2単位に満たないため、2単位分のURLが発行できません！1単位で再度お試しください。");
                 }
             }
+
+            document.getElementById("url_assignment_button").style.display ="none";
+            document.getElementById('result').innerHTML = "<p>URLを発行し、テキストファイルとしてダウンロードしました。\n マニュアルとテキストファイルを参考して実験を進めてください。</p>";
         }
 
         function downloadAsTextFile( fileName, content ) {
