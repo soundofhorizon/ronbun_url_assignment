@@ -13,7 +13,7 @@
     <br>
     <p>取り組むことができる単位数を選択してください。</p>
     <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
-    <label><input type="radio" name="howmany" value="2">2単位</label>
+    <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
     <hr id="border_check_1" style="display: none;">
     <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A">A</label>
     <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="B">B</label>
@@ -37,7 +37,7 @@
                 document.getElementById("whattyperatio2").style.display ="block";
                 document.getElementById("whattyperatio3").style.display ="block";
                 document.getElementById("whattyperatio4").style.display ="block";
-            }else{
+            }else if (elements.item(1).checked){
                 document.getElementById("border_check_1").style.display ="none";
                 document.getElementById("whattyperatio1").style.display ="none";
                 document.getElementById("whattyperatio2").style.display ="none";
