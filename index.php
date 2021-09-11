@@ -15,10 +15,10 @@
     <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
     <label><input type="radio" name="howmany" value="2">2単位</label>
     <hr id="border_check_1" style="display: none;">
-    <label><input type="radio" name="whattype" value="A" style="display: none;">A</label>
-    <label><input type="radio" name="whattype" value="B" style="display: none;">B</label>
-    <label><input type="radio" name="whattype" value="C" style="display: none;">C</label>
-    <label><input type="radio" name="whattype" value="D" style="display: none;">D</label>
+    <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A" style="display: none;">A</label>
+    <label><input type="radio" name="whattype" value="B" id="whattyperatio2" style="display: none;">B</label>
+    <label><input type="radio" name="whattype" value="C" id="whattyperatio3" style="display: none;">C</label>
+    <label><input type="radio" name="whattype" value="D" id="whattyperatio4" style="display: none;">D</label>
     <br><br>
     <button>URL発行</button>
 
@@ -33,7 +33,7 @@
             let elements = document.getElementsByName('howmany');
             if (elements.item(0).checked){
                 document.getElementById("border_check_1").style.display ="block";
-                document.getElementsByName('whattype').style.display ="block";
+                document.getElementById("whattyperatio1").style.display ="block";
             }else{
                 document.getElementById("border_check_1").style.display ="none";
                 document.getElementsByName('whattype').style.display ="none";
