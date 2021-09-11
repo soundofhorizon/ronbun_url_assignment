@@ -32,6 +32,7 @@
         	"single_query" => $single_query
         );
         $param_json = json_encode( $param );
+        echo($param_json)
     ?>
 
     <script type="text/javascript">
