@@ -55,10 +55,10 @@
                                      }
                                 ?>"
 
-           var single_query = "<?php while ($row = pg_fetch_row($single_query)) {
+           var single_query = '<?php while ($row = pg_fetch_row($single_query)) {
                                        echo $row[0];
                                      }
-                                ?>"
+                                ?>'
 
            package_query = package_query.replace("{{", "").replace("}}", "").split("},{");
            console.log(package_query);
