@@ -38,6 +38,7 @@
                 document.getElementById("whattyperatio3").style.display ="block";
                 document.getElementById("whattyperatio4").style.display ="block";
                 document.getElementById("warn_check_1").style.display ="block";
+                document.getElementById("url_assignment_button").style.display ="block";
             }else if(elements.item(1).checked){
                 document.getElementById("border_check_1").style.display ="none";
                 document.getElementById("whattyperatio1").style.display ="none";
@@ -45,6 +46,7 @@
                 document.getElementById("whattyperatio3").style.display ="none";
                 document.getElementById("whattyperatio4").style.display ="none";
                 document.getElementById("warn_check_1").style.display ="none";
+                document.getElementById("url_assignment_button").style.display ="block";
             }
         }
         let elements1 = document.getElementById('onetime');
