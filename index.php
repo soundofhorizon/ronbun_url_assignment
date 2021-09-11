@@ -75,6 +75,7 @@
                     single_query.push(package_query.slice(-1)[0].split(",")[0]);
                     var pick_url = package_query.slice(-1)[0].split(",")[1];
                     var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?"
+                    package_query.pop();
                     downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
                 }else{
                     var index = Math.floor(Math.random() * single_query.length);
