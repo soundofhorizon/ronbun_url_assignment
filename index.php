@@ -39,7 +39,7 @@
                 document.getElementsByName('whattype').style.display ="none";
             }
         }
-        let elements1 = document.getElementsById('onetime');
+        let elements1 = document.getElementById('onetime');
         elements1.addEventListener('change', putRatio);
     </script>
 </body>
