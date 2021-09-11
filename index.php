@@ -12,7 +12,7 @@
     <hr>
     <br>
     <p>取り組むことができる単位数を選択してください。</p>
-    <label><input type="radio" name="howmany" value="1">1単位</label>
+    <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
     <label><input type="radio" name="howmany" value="2">2単位</label>
     <hr id="border_check_1" style="display: none;">
     <label><input type="radio" name="whattype" value="A" style="display: none;">A</label>
@@ -39,7 +39,7 @@
                 document.getElementsByName('whattype').style.display ="none";
             }
         }
-        let elements1 = document.getElementsByName('howmany');
+        let elements1 = document.getElementsById('onetime');
         elements1.addEventListener('change', putRatio);
     </script>
 </body>
