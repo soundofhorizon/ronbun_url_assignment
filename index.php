@@ -51,8 +51,7 @@
 
         function URLAssainment(){
            var  js_test = <?php while ($row = pg_fetch_row($package_query)) {
-                                  echo "Author: $row[0]  E-mail: $row[1]";
-                                  echo "<br />\n";
+                                  echo "$row[0]";
                                 }
                            ?>
         }
