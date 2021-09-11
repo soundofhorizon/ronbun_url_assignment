@@ -19,7 +19,7 @@
     <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
     <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
     <hr id="border_check_1" style="display: none;">
-    <p id="warn_check_1" style="display: none;">※実験の参加が2回目の場合は、1回目の動画がどの様な内容だったかを入力してください。
+    <p id="warn_check_1" style="display: none;">※実験の参加が2回目の場合は、1回目の動画がどの様な内容だったかを入力してください。</p>
     <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="1">来客の応対</label>
     <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="2">挨拶</label>
     <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="3">電話のかけ方</label>
@@ -58,12 +58,12 @@
            var package_query = "<?php while ($row = pg_fetch_row($package_query)) {
                                        echo $row[0];
                                      }
-                                ?>"
+                                ?>";
 
            var single_query = '<?php while ($row = pg_fetch_row($single_query)) {
                                        echo $row[0];
                                      }
-                                ?>'
+                                ?>';
 
            package_query = package_query.replace("{{", "").replace("}}", "").split("},{");
            single_query = single_query.replace("{", "").replace("}", "").split(",");
@@ -72,22 +72,32 @@
             if (howmanyunit.item(0).checked){
                 if(single_query.length == 1){
                     // unpack
-                    single_query.push(package_query.slice(-1)[0].split(",")[0]);
-                    var pick_url = package_query.slice(-1)[0].split(",")[1];
-                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?"
-                    package_query.pop();
-                    downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
+                    if(package_query.slice(-1)[0] != "first,endpoint"){
+                        single_query.push(package_query.slice(-1)[0].split(",")[0]);
+                        var pick_url = package_query.slice(-1)[0].split(",")[1];
+                        var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?";
+                        package_query.pop();
+                        downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
+                    }else{
+                        alert("実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。");
+                    }
                 }else{
                     var index = Math.floor(Math.random() * single_query.length);
                     var pick_url = single_query[index];
-                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?"
+                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?";
+                    single_query.splice(index, 1);
                     downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
                 }
             }else if(howmanyunit.item(1).checked){
-                var index = Math.floor(Math.random() * package_query.length);
-                var pick_url = package_query[index];
-                var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[0]+"-home.html? \n https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[1]+"-home.html?"
-                downloadAsTextFile("実験アクセス用URL記述ファイル-2単位", context);
+                if(package_query.slice(-1)[0] != "first,endpoint"){
+                    var index = Math.floor(Math.random() * package_query.length);
+                    var pick_url = package_query[index].split(",");
+                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[0]+"-home.html? \n https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[1]+"-home.html?";
+                    package_query.splice(index, 1);
+                    downloadAsTextFile("実験アクセス用URL記述ファイル-2単位", context);
+                }else{
+                   alert("実験の残り数が2単位に満たないため、2単位分のURLが発行できません！1単位で再度お試しください。");
+                }
             }
         }
 
