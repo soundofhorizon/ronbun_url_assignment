@@ -1,7 +1,7 @@
 <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
-        $package_query = pg_fetch_array(pg_query($conn, "select package_query from url_assainment;"), NULL, PGSQL_ASSOC);
-        $single_query = pg_fetch_array(pg_query($conn, "select single_query from url_assainment;"), NULL, PGSQL_ASSOC);
+        $package_query = pg_query($conn, "select package_query from url_assainment;");
+        $single_query = pg_query($conn, "select single_query from url_assainment;");
  ?>
 <html lang="en">
 <head>
@@ -50,7 +50,11 @@
         elements2.addEventListener('change', putRatio);
 
         function URLAssainment(){
-           var  js_test = <?php echo $package_query; ?>
+           var  js_test = <?php while ($row = pg_fetch_row($package_query)) {
+                                  echo "Author: $row[0]  E-mail: $row[1]";
+                                  echo "<br />\n";
+                                }
+                           ?>
         }
     </script>
 </body>
