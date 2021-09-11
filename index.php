@@ -12,20 +12,30 @@
     <hr>
     <br>
     <p>取り組むことができる単位数を選択してください。</p>
-    <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
-    <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
-    <hr id="border_check_1" style="display: none;">
-    <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A">A</label>
-    <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="B">B</label>
-    <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="C">C</label>
-    <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="D">D</label>
-    <br><br>
-    <button>URL発行</button>
+    <form action="radio.php" method="POST">
+        <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
+        <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
+        <hr id="border_check_1" style="display: none;">
+        <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A">A</label>
+        <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="B">B</label>
+        <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="C">C</label>
+        <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="D">D</label>
+        <br><br>
+        <button>URL発行</button>
+    </form>
 
     <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
         $result = pg_query($conn, "select * from url_assainment;");
-        var_dump(pg_fetch_all($result));
+
+        $target_html = file_get_contents('https://urlassainment.herokuapp.com/');
+        $target_html = mb_convert_encoding($target_html, 'HTML-ENTITIES', 'UTF-8');
+
+        $dom = new DOMDocument;
+        @$dom->loadHTML($target_html);
+        $xml_object = simplexml_import_dom($dom);
+
+        (string)$xml_object->body->input[0]->attributes()->value;
     ?>
 
     <script type="text/javascript">
