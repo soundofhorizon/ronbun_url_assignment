@@ -37,7 +37,7 @@
                 document.getElementById("whattyperatio2").style.display ="block";
                 document.getElementById("whattyperatio3").style.display ="block";
                 document.getElementById("whattyperatio4").style.display ="block";
-            }else if (elements.item(1).checked){
+            }else if(elements.item(1).checked){
                 document.getElementById("border_check_1").style.display ="none";
                 document.getElementById("whattyperatio1").style.display ="none";
                 document.getElementById("whattyperatio2").style.display ="none";
@@ -46,7 +46,9 @@
             }
         }
         let elements1 = document.getElementById('onetime');
+        let elements2 = document.getElementById('twotime');
         elements1.addEventListener('change', putRatio);
+        elements2.addEventListener('change', putRatio);
     </script>
 </body>
 </html>
