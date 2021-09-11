@@ -12,19 +12,12 @@
     <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
     <p>選択した数のURLが発行され、そのURLが記載されたファイルがpdf形式でダウンロードされます。</p>
     <p>ダウンロードされたファイルを開き、その後の作業を進めてください。</p>
-    <p>同時に最大2単位まで受けることが可能です。</p>
+    <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
     <hr>
     <br>
     <p>取り組むことができる単位数を選択してください。</p>
     <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
     <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
-    <hr id="border_check_1" style="display: none;">
-    <p id="warn_check_1" style="display: none;">※実験の参加が2回目の場合は、1回目の動画がどの様な内容だったかを入力してください。</p>
-    <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="1">来客の応対</label>
-    <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="2">挨拶</label>
-    <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="3">電話のかけ方</label>
-    <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="4">敬語</label>
-    <br><br>
     <button id="url_assignment_button" onclick="URLassignment()" style="display: none;">URL発行</button>
     <p id="result"></p>
 
@@ -32,20 +25,8 @@
         function putRatio(){
             let elements = document.getElementsByName('howmany');
             if (elements.item(0).checked){
-                document.getElementById("border_check_1").style.display ="block";
-                document.getElementById("whattyperatio1").style.display ="block";
-                document.getElementById("whattyperatio2").style.display ="block";
-                document.getElementById("whattyperatio3").style.display ="block";
-                document.getElementById("whattyperatio4").style.display ="block";
-                document.getElementById("warn_check_1").style.display ="block";
                 document.getElementById("url_assignment_button").style.display ="block";
             }else if(elements.item(1).checked){
-                document.getElementById("border_check_1").style.display ="none";
-                document.getElementById("whattyperatio1").style.display ="none";
-                document.getElementById("whattyperatio2").style.display ="none";
-                document.getElementById("whattyperatio3").style.display ="none";
-                document.getElementById("whattyperatio4").style.display ="none";
-                document.getElementById("warn_check_1").style.display ="none";
                 document.getElementById("url_assignment_button").style.display ="block";
             }
         }
@@ -55,6 +36,7 @@
         elements2.addEventListener('change', putRatio);
 
         function URLassignment(){
+
            var package_query = "<?php while ($row = pg_fetch_row($package_query)) {
                                        echo $row[0];
                                      }
