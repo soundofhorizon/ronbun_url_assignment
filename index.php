@@ -52,9 +52,9 @@
         elements2.addEventListener('change', putRatio);
 
         function URLAssainment(){
-            var package_query = <?php echo $package_query; ?>;
+            let package_query = <?php echo $package_query;?>
 
-            var single_query = <?php echo $single_query; ?>;
+            let single_query = <?php echo $single_query;?>
 
             document.getElementById('result').innerHTML = package_query;
         }
