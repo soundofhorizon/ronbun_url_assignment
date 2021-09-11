@@ -12,17 +12,16 @@
     <hr>
     <br>
     <p>取り組むことができる単位数を選択してください。</p>
-    <form action="radio.php" method="POST">
-        <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
-        <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
-        <hr id="border_check_1" style="display: none;">
-        <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A">A</label>
-        <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="B">B</label>
-        <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="C">C</label>
-        <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="D">D</label>
-        <br><br>
-        <button onclick="URLAssainment()">URL発行</button>
-    </form>
+    <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
+    <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
+    <hr id="border_check_1" style="display: none;">
+    <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A">A</label>
+    <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="B">B</label>
+    <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="C">C</label>
+    <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="D">D</label>
+    <br><br>
+    <button onclick="URLAssainment()">URL発行</button>
+    <p id="result"></p>
 
     <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
@@ -53,7 +52,11 @@
         elements2.addEventListener('change', putRatio);
 
         function URLAssainment(){
-            var
+            var package_query = <?php $conn = pg_connect(getenv("DATABASE_URL")); $result = pg_query($conn, "select package_query from url_assainment;"); echo $result;?>;
+
+            var single_query = <?php $conn = pg_connect(getenv("DATABASE_URL")); $result = pg_query($conn, "select single_query from url_assainment;"); echo $result;?>;
+
+            document.getElementById('result').innerHTML = package_query;
         }
     </script>
 </body>
