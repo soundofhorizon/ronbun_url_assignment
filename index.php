@@ -15,7 +15,7 @@
     <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
     <label><input type="radio" name="howmany" value="2">2単位</label>
     <hr id="border_check_1" style="display: none;">
-    <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A" style="display: none;">A</label>
+    <label id="whattyperatio1" style="display: none;"><input type="radio" name="whattype" value="A">A</label>
     <label id="whattyperatio2" style="display: none;"><input type="radio" name="whattype" value="B">B</label>
     <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="C">C</label>
     <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="D">D</label>
