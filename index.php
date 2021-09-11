@@ -25,7 +25,7 @@
     <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="3">電話のかけ方</label>
     <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="4">敬語</label>
     <br><br>
-    <button onclick="URLAssainment()">URL発行</button>
+    <button onclick="URLAssainment()" style="display: block;">URL発行</button>
     <p id="result"></p>
 
     <script type="text/javascript">
