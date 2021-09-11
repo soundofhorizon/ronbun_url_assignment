@@ -30,12 +30,12 @@
 
     <script type="text/javascript">
         function putRatio(){
-            let elements = document.getElementsByName('howmany');
+            let elements = document.getElementByName('howmany');
             if (elements.item(0).checked){
-                document.getElementsById("border_check_1").style.display ="block";
+                document.getElementById("border_check_1").style.display ="block";
                 document.getElementsByName('whattype').style.display ="block";
             }else{
-                document.getElementsById("border_check_1").style.display ="none";
+                document.getElementById("border_check_1").style.display ="none";
                 document.getElementsByName('whattype').style.display ="none";
             }
         }
