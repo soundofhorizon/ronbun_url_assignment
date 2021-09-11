@@ -23,11 +23,12 @@
     <p id="result"></p>
 
     <script type="text/javascript">
+        var frag = true;
         function putRatio(){
             let elements = document.getElementsByName('howmany');
-            if (elements.item(0).checked){
+            if (elements.item(0).checked && frag){
                 document.getElementById("url_assignment_button").style.display ="block";
-            }else if(elements.item(1).checked){
+            }else if(elements.item(1).checked && frag){
                 document.getElementById("url_assignment_button").style.display ="block";
             }
         }
@@ -86,8 +87,7 @@
             document.getElementById("url_assignment_button").style.display ="none";
             document.getElementById('result').innerHTML = "<p>URLを発行し、テキストファイルとしてダウンロードしました。\n マニュアルとテキストファイルを参考して実験を進めてください。</p>";
 
-            sleep(3000);
-            window.close();
+            frag = false;
         }
 
         function downloadAsTextFile( fileName, content ) {
