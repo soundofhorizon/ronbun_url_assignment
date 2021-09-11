@@ -69,18 +69,24 @@
            single_query = single_query.replace("{", "").replace("}", "").split(",");
 
            let howmanyunit = document.getElementsByName('howmany');
-            if (elements.item(0).checked){
-                document.getElementById("border_check_1").style.display ="block";
-                document.getElementById("whattyperatio1").style.display ="block";
-                document.getElementById("whattyperatio2").style.display ="block";
-                document.getElementById("whattyperatio3").style.display ="block";
-                document.getElementById("whattyperatio4").style.display ="block";
-                document.getElementById("warn_check_1").style.display ="block";
-            }else if(elements.item(1).checked){
+            if (howmanyunit.item(0).checked){
+                if(single_query.length == 0){
+                    # unpack
+                    single_query.push(package_query[-1][0]);
+                    var pick_url = package_query[-1][1];
+                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?"
+                    downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
+                }else{
+                    var index = Math.floor(Math.random() * single_query.length);
+                    var pick_url = single_query[index];
+                    var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url+"-home.html?"
+                    downloadAsTextFile("実験アクセス用URL記述ファイル-1単位", context);
+                }
+            }else if(howmanyunit.item(1).checked){
                 var index = Math.floor(Math.random() * package_query.length);
                 var pick_url = package_query[index];
                 var context = "https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[0]+"-home.html? \n https://soundofhorizon.github.io/ronbun-homepage/"+pick_url[1]+"-home.html?"
-                downloadAsTextFile("実験アクセス用URL記述ファイル", context);
+                downloadAsTextFile("実験アクセス用URL記述ファイル-2単位", context);
             }
         }
 
