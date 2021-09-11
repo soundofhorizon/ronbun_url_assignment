@@ -19,7 +19,7 @@
 
     <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
-        $result = pg_query($conn, "select * from pg_stat_activity");
+        $result = pg_query($conn, "select * from url_assainment;");
         var_dump(pg_fetch_all($result));
     ?>
 </body>
