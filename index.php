@@ -21,21 +21,13 @@
         <label id="whattyperatio3" style="display: none;"><input type="radio" name="whattype" value="C">C</label>
         <label id="whattyperatio4" style="display: none;"><input type="radio" name="whattype" value="D">D</label>
         <br><br>
-        <button>URL発行</button>
+        <button onclick="URLAssainment()">URL発行</button>
     </form>
 
     <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
         $result = pg_query($conn, "select * from url_assainment;");
-
-        $target_html = file_get_contents('https://urlassainment.herokuapp.com/');
-        $target_html = mb_convert_encoding($target_html, 'HTML-ENTITIES', 'UTF-8');
-
-        $dom = new DOMDocument;
-        @$dom->loadHTML($target_html);
-        $xml_object = simplexml_import_dom($dom);
-
-        (string)$xml_object->body->input[0]->attributes()->value;
+        var_dump($result);
     ?>
 
     <script type="text/javascript">
@@ -59,6 +51,10 @@
         let elements2 = document.getElementById('twotime');
         elements1.addEventListener('change', putRatio);
         elements2.addEventListener('change', putRatio);
+
+        function URLAssainment(){
+            var
+        }
     </script>
 </body>
 </html>
