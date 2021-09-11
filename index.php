@@ -2,12 +2,6 @@
         $conn = pg_connect(getenv("DATABASE_URL"));
         $package_query = pg_query($conn, "select package_query from url_assainment;");
         $single_query = pg_query($conn, "select single_query from url_assainment;");
-        $param = array(
-        	"package_query" => $package_query,
-        	"single_query" => $single_query
-        );
-        $param_json = json_encode( $param );
-        var_dump($param_json);
  ?>
 <html lang="en">
 <head>
@@ -56,8 +50,7 @@
         elements2.addEventListener('change', putRatio);
 
         function URLAssainment(){
-           var param = JSON.parse('<?php echo $param_json; ?>');  //JSONデコード
-           console.log( param );
+           var  js_test = <?php echo $package_query; ?>
         }
     </script>
 </body>
