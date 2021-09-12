@@ -243,7 +243,8 @@
                                 $pdf->writeHTML($html, true, false, false, false, '');
 
                                 // PDFを表示
-                                [php] ob_end_clean();[/php]
+                                ob_start();
+                                ob_end_clean();
                                 $pdf->Output('option_sheet.pdf', 'I');
                                 break;
                             }
