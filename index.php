@@ -136,14 +136,20 @@
                 }
                 $single_update_sql = rtrim($single_update_sql, ",");
                 $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_update_sql . "];";
-                var_dump($single_sql);
                 $package_update_sql = "";
                 for($i = 0; $i < count($package_query_result); $i++){
                     $package_update_sql .= "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "'],";
                 }
                 $package_update_sql = rtrim($package_update_sql, ",");
                 $package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" . $package_update_sql . "];";
-                var_dump($package_sql);
+                $result_flag_single = pg_query($single_sql);
+                if (!$result_flag_single) {
+                    die('Single INSERTクエリーが失敗しました。'.pg_last_error());
+                }
+                $result_flag_package = pg_query($package_sql);
+                if (!$result_flag_package) {
+                    die('Package INSERTクエリーが失敗しました。'.pg_last_error());
+                }
             }else{
                 $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
                 echo $alert;
