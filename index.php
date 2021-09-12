@@ -1,29 +1,5 @@
 <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
- ?>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>URL Assignment System</title>
-</head>
-<body>
-    <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
-    <p>選択した数のURLが発行され、そのURLが記載されたファイルがpdf形式でダウンロードされます。</p>
-    <p>ダウンロードされたファイルを開き、その後の作業を進めてください。</p>
-    <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
-    <hr>
-    <br>
-    <p>学籍番号を入力してください。</p>
-    <input type="text" id="myText"><br>
-    <hr>
-    <p>取り組むことができる単位数を選択してください。</p>
-    <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
-    <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
-    <br><br>
-    <button id="url_assignment_button" onclick="URLassignment()" style="display: none;">URL発行</button>
-    <p id="result"></p>
-
-    <?php
         // SQLで情報を取得
         $package_query = pg_query($conn, 'select Package_query from url_assignment;');
         while ($row = pg_fetch_row($package_query)) {
@@ -74,6 +50,27 @@
                 break;
         }
     ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Assignment System</title>
+</head>
+<body>
+    <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
+    <p>選択した数のURLが発行され、そのURLが記載されたファイルがpdf形式でダウンロードされます。</p>
+    <p>ダウンロードされたファイルを開き、その後の作業を進めてください。</p>
+    <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
+    <hr>
+    <br>
+    <p>学籍番号を入力してください。</p>
+    <input type="text" id="myText"><br>
+    <hr>
+    <p>取り組むことができる単位数を選択してください。</p>
+    <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
+    <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
+    <br><br>
+    <button id="url_assignment_button" onclick="URLassignment()" style="display: none;">URL発行</button>
+    <p id="result"></p>
 
     <script type="text/javascript">
         var frag = true;
