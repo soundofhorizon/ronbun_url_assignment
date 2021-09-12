@@ -15,6 +15,9 @@
     <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
     <hr>
     <br>
+    <p>学籍番号を入力してください。</p>
+    <input type="text" id="input_message"><br>
+    <hr>
     <p>取り組むことができる単位数を選択してください。</p>
     <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
     <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
@@ -38,6 +41,14 @@
         elements2.addEventListener('change', putRatio);
 
         function URLassignment(){
+
+            const textbox = document.getElementById("input-message");
+            try{
+                const inputValue = textbox.value;
+            }catch(err){
+                alert("学籍番号が入力されていません。入力した後再度URL発行をお試しください。");
+                return
+            }
 
            var package_query = "<?php while ($row = pg_fetch_row($package_query)) {
                                        echo $row[0];
