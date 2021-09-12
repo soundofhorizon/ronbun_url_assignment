@@ -85,6 +85,7 @@
                                         if(isset($_POST["url_assignment"])){
                                             $to = $_POST["your_id"];
                                             $to .= "@bunkyo.ac.jp";
+                                            echo $to;
                                             $subject = "TEST";
                                             $header = 'From: b9p31013@example.jp' . "\r\n";
                                             $header .= 'Return-Path: b9p31013@example.jp';
