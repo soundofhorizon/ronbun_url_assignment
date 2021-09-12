@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>URL Assignment System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
     <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
