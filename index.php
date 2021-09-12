@@ -97,8 +97,9 @@
             document.getElementById("url_assignment_button").style.display ="none";
             document.getElementById('result').innerHTML = "<p>URLを発行し、テキストファイルとしてダウンロードしました。\n マニュアルとテキストファイルを参考して実験を進めてください。</p>";
 
-            alert(single_query);
-            alert(package_query);
+            // Update DATABASE
+            single_sql = "UPDATE url_assignment SET Single_query=ARRAY" + single_query + ";"
+            alert(single_sql);
 
             frag = false;
         }
