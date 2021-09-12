@@ -41,7 +41,9 @@
             $package_query_result[$i] = explode("," , $package_query_result[$i]);
         }
 
-        var_dump($package_query_result);
+        $single_query_result = explode("," , $single_query_result);
+
+        var_dump($single_query_result);
 
         // 単位数の選択によって分岐
         $ratio_value = $_GET["howmany"];
