@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <title>URL Assignment System</title>
         <?php
-                    if(isset($_POST['howmany'])) {
+                    if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
                         $conn = pg_connect(getenv("DATABASE_URL"));
                         // SQLで情報を取得
                         $package_query = pg_query($conn, 'select Package_query from url_assignment;');
@@ -64,10 +64,67 @@
                                         break;
                                     }
                                 }else{
+                                    // '""'の要素は削除
+                                    unset($single_query_result[0]);
+                                    $index = rand(0, count($single_query_result);
+                                    $pick_url = $single_query_result[$index];
+                                    unset($single_query_result[$index]);
+                                    array_unshift($single_query_result, '""');
+                                    $context = "1単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
+                                    $context .= $pick_url;
+                                    $context .= "-home.html?";
+                                    //学籍番号へメール送信
+                                    if(isset($_POST["url_assignment"])){
+                                              require 'vendor/autoload.php';
+
+                                              $email = new \SendGrid\Mail\Mail();
+                                              $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
+                                              $email->setSubject("実験アクセス用URL記述メール-1単位");
+                                              $to = $_POST["your_id"];
+                                              $to .= "@bunkyo.ac.jp";
+                                              $email->addTo($to, "参加者様");
+                                              $email->addContent("text/plain", $context);
+                                              $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+                                              try {
+                                                  $response = $sendgrid->send($email);
+                                              } catch (Exception $e) {
+                                                  echo 'Caught exception: '. $e->getMessage() ."\n";
+                                              }
+                                    }
                                     break;
                                 }
                             case 2:
-                                break;
+                                     // '""'の要素は削除
+                                    unset($package_query_result[0]);
+                                    $index = rand(0, count($package_query_result);
+                                    $pick_url = $package_query_result[$index];
+                                    unset($package_query_result[$index]);
+                                    array_unshift($package_query_result, array("first", "endpoint"));
+                                    $context = "2単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
+                                    $context .= $pick_url[0];
+                                    $context .= "-home.html?\n\n-2-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
+                                    $context .= $pack_url[1];
+                                    $context .= "-home.html?";
+
+                                    //学籍番号へメール送信
+                                    if(isset($_POST["url_assignment"])){
+                                              require 'vendor/autoload.php';
+
+                                              $email = new \SendGrid\Mail\Mail();
+                                              $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
+                                              $email->setSubject("実験アクセス用URL記述メール-2単位");
+                                              $to = $_POST["your_id"];
+                                              $to .= "@bunkyo.ac.jp";
+                                              $email->addTo($to, "参加者様");
+                                              $email->addContent("text/plain", $context);
+                                              $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+                                              try {
+                                                  $response = $sendgrid->send($email);
+                                              } catch (Exception $e) {
+                                                  echo 'Caught exception: '. $e->getMessage() ."\n";
+                                              }
+                                    }
+                                    break;
                         }
                     }else{
                         $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
