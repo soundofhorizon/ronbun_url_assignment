@@ -83,17 +83,22 @@
                                         $context .= "-home.html?";
                                         //学籍番号へメール送信
                                         if(isset($_POST["url_assignment"])){
-                                            $to = $_POST["your_id"];
-                                            $to .= "@bunkyo.ac.jp";
-                                            echo $to;
-                                            $subject = "TEST";
-                                            $header = 'From: b9p31013@example.jp' . "\r\n";
-                                            $header .= 'Return-Path: b9p31013@example.jp';
-                                            if(mb_send_mail("ooshiba0206@gmail.com", $subject, $context, $header)){
-                                                echo "メールを送信しました";
-                                            } else {
-                                                echo "メールの送信に失敗しました";
-                                            };
+                                              require 'vendor/autoload.php';
+
+                                              $email = new \SendGrid\Mail\Mail();
+                                              $email->setFrom("url_assignment_agent@example.com", "Example User");
+                                              $email->setSubject("Hello from SendGrid");
+                                              $email->addTo("b9p31013@bunkyo.ac.jp", "Example User");
+                                              $email->addContent("text/plain", "Hello world");
+                                              $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+                                              try {
+                                                  $response = $sendgrid->send($email);
+                                                  print $response->statusCode() . "\n";
+                                                  print_r($response->headers());
+                                                  print $response->body() . "\n";
+                                              } catch (Exception $e) {
+                                                  echo 'Caught exception: '. $e->getMessage() ."\n";
+                                              }
                                         }
                                         break;
                                     }
