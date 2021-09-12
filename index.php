@@ -16,7 +16,7 @@
     <hr>
     <br>
     <p>学籍番号を入力してください。</p>
-    <input type="text" id="input_message"><br>
+    <input type="text" id="myText"><br>
     <hr>
     <p>取り組むことができる単位数を選択してください。</p>
     <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
@@ -42,10 +42,7 @@
 
         function URLassignment(){
 
-            const textbox = document.getElementById("input-message");
-            try{
-                const inputValue = textbox.value;
-            }catch(err){
+            if (document.getElementById('myText').value == "" || document.getElementById('myText').value == null)  {
                 alert("学籍番号が入力されていません。入力した後再度URL発行をお試しください。");
                 return
             }
