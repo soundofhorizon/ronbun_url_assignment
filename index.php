@@ -86,9 +86,11 @@
                                               require 'vendor/autoload.php';
 
                                               $email = new \SendGrid\Mail\Mail();
-                                              $email->setFrom("b9p31013@bunkyo.ac.jp", "Example User");
-                                              $email->setSubject("Hello from SendGrid");
-                                              $email->addTo("b9p31013@bunkyo.ac.jp", "Example User");
+                                              $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
+                                              $email->setSubject($context);
+                                              $to = $_POST["your_id"]
+                                              $to .= "@bunkyo.ac.jp"
+                                              $email->addTo($to, "参加者様");
                                               $email->addContent("text/plain", "Hello world");
                                               $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
                                               try {
