@@ -87,8 +87,11 @@
                                             $to .= "@bunkyo.ac.jp";
                                             $subject = "TEST";
                                             $message = "This is TEST.\r\nHow are you?";
-                                            $headers = "From: b9p31013@bunkyo.ac.jp";
-                                            mail($to, $subject, $message, $headers);
+                                            if(mb_send_mail($to, $subject, $message)){
+                                                echo "メールを送信しました";
+                                            } else {
+                                                echo "メールの送信に失敗しました";
+                                            };
                                         }
                                         break;
                                     }
