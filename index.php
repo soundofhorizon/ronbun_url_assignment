@@ -42,6 +42,7 @@
                             $fileName = "実験アクセス用URL記述ファイル-1単位.txt";
                             header('Content-Type: text/plain');
                             header('Content-Disposition: attachment; filename='.$fileName);
+                            echo "到達してます";
                             echo mb_convert_encoding($context, "SJIS", "UTF-8");  //←UTF-8のままで良ければ不要です。
                         }
                     }else{
