@@ -39,6 +39,8 @@
                                 // package_query_resultの最後の要素をunpack
                                 // 今回発行しないほうをsingleに追加
                                 array_push($single_query_result, end($package_query_result)[0]);
+                                // unpackした要素を削除
+                                unset($package_query_result[count($package_query_result)-1]);
                                 $pick_url = end($package_query_result)[1];
                                 $context = "1単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url;
