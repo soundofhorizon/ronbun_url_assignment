@@ -98,6 +98,7 @@
                               unset($package_query_result[0]);
                               $index = rand(0, count($package_query_result));
                               $pick_url = $package_query_result[$index];
+                              var_dump($pick_url);
                               unset($package_query_result[$index]);
                               array_unshift($package_query_result, array("first", "endpoint"));
                               $context = "2単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
@@ -126,8 +127,6 @@
                               }
                               break;
                   }
-                  print($single_query_result);
-                  print($package_query_result);
               }else{
                   $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
                   echo $alert;
