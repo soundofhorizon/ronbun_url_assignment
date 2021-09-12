@@ -115,7 +115,7 @@
     <hr>
     <p>取り組むことができる単位数を選択してください。</p>
     <br><br>
-    <form action="index.php" method="post">
+    <form action="#" method="post">
         <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
         <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
         <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
