@@ -30,6 +30,7 @@
                         if(in_array("first", end($package_query_result))){
                             $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
                             echo $alert;
+                            break;
                         }else{
                             // package_query_resultの最後の要素をunpack
                             // 今回発行しないほうをsingleに追加
@@ -41,6 +42,7 @@
                             header('Content-Type: text/plain');
                             header('Content-Disposition: attachment; filename='.$fileName);
                             echo mb_convert_encoding($context, "SJIS", "UTF-8");  //←UTF-8のままで良ければ不要です。
+                            break;
                         }
                     }else{
                         echo "到達してます2";
