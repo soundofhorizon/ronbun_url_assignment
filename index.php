@@ -40,7 +40,6 @@
                             $fileName = "実験アクセス用URL記述ファイル-1単位.txt";
                             header('Content-Type: text/plain');
                             header('Content-Disposition: attachment; filename='.$fileName);
-                            echo "到達してます";
                             echo mb_convert_encoding($context, "SJIS", "UTF-8");  //←UTF-8のままで良ければ不要です。
                         }
                     }else{
@@ -75,7 +74,7 @@
         <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
         <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
     </form>
-    <p id="result"></p>
+    <p id="result"><?php $pick_url ?></p>
 
     <script type="text/javascript">
         var frag = true;
