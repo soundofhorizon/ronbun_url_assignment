@@ -97,13 +97,20 @@
             document.getElementById("url_assignment_button").style.display ="none";
             document.getElementById('result').innerHTML = "<p>URLを発行し、テキストファイルとしてダウンロードしました。\n マニュアルとテキストファイルを参考して実験を進めてください。</p>";
 
-            // Update DATABASE
+            // Update DATABASE Single
             // SQLのtextに対応するためにシングルクォーテーションで要素を全部囲む
             for(let i=0; i<single_query.length; i++){
-                single_query[i] = "'" + single_query[i] + "'"
+                single_query[i] = "'" + single_query[i] + "'";
             }
-            single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" + single_query + "];"
+            single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" + single_query + "];";
             alert(single_sql);
+
+            // Update DATABASE Package
+            for(let i=0; i<package_query.length; i++){
+                package_query[i] = "ARRAY['" + package_query[i][0] + "','" + package_query[i][1] + "']";
+            }
+            package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" + package_query + "];"
+            alert(package_sql);
 
             frag = false;
         }
