@@ -44,11 +44,13 @@
                                     $context .= $pick_url;
                                     $context .= "-home.html?";
                                     //text ファイル出力
-                                    $filename = "実験アクセス用URL記述ファイル-1単位.txt";
-                                    file_put_contents($filename, $context);
-
-                                    header("Content-type: text/plain");
-                                    header("Content-Disposition: attachment; filename=$filename");
+                                    define('FILE_NAME', '実験アクセス用URL記述ファイル-1単位.txt');
+                                    /* 新規ファイルとして書き込む */
+                                    $fp = fopen(FILE_NAME, 'w');
+                                    fwrite($fp, $context);
+                                    fclose($fp);
+                                    header('Content-Type: application/force-download');
+                                    readfile(FILE_NAME);
                                     break;
                                 }
                             }else{
