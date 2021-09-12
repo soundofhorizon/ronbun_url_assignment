@@ -5,8 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>URL Assignment System</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="require.js"></script>
 </head>
 <body>
     <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
@@ -26,9 +24,25 @@
     <p id="result"></p>
 
     <?php
+        // SQLで情報を取得
         $package_query = pg_query($conn, 'select Package_query from url_assignment;');
         while ($row = pg_fetch_row($package_query)) {
-            echo $row[0];
+            $package_query_result = $row[0];
+        }
+        $single_query = pg_query($conn, "select Single_query from url_assignment;");
+        while ($row = pg_fetch_row($single_query)) {
+            $single_query_result = $row[0];
+        }
+
+        var_dump($package_query_result);
+
+        // 単位数の選択によって分岐
+        $ratio_value = $_GET["howmany"];
+        switch($ratio_value){
+            case 1:
+                break;
+            case 2:
+                break;
         }
     ?>
 
@@ -56,22 +70,7 @@
 
         }
         /*
-           var package_query = "<?php
-                                     $package_query = pg_query($conn, 'select Package_query from url_assignment;');
-                                     while ($row = pg_fetch_row($package_query)) {
-                                       echo $row[0];
-                                     }
-                                ?>";
 
-           var single_query = '<?php
-                                     $single_query = pg_query($conn, "select Single_query from url_assignment;");
-                                     while ($row = pg_fetch_row($single_query)) {
-                                       echo $row[0];
-                                     }
-                                ?>';
-
-           package_query = package_query.replace("{{", "").replace("}}", "").split("},{");
-           single_query = single_query.replace("{", "").replace("}", "").split(",");
 
            let howmanyunit = document.getElementsByName('howmany');
             if (howmanyunit.item(0).checked){
