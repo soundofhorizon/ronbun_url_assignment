@@ -86,8 +86,9 @@
                                             $to = $_POST["your_id"];
                                             $to .= "@bunkyo.ac.jp";
                                             $subject = "TEST";
-                                            $message = "This is TEST.\r\nHow are you?";
-                                            if(mb_send_mail($to, $subject, $message)){
+                                            $header = 'From: b9p31013@example.jp' . "\r\n";
+                                            $header .= 'Return-Path: b9p31013@example.jp';
+                                            if(mb_send_mail($to, $subject, $context, $header)){
                                                 echo "メールを送信しました";
                                             } else {
                                                 echo "メールの送信に失敗しました";
