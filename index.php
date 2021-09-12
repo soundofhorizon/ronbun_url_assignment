@@ -2,106 +2,6 @@
 <head>
     <meta charset="UTF-8">
     <title>URL Assignment System</title>
-        <?php
-                function download($pPath, $pMimeType = null)
-                {
-                    //-- ファイルが読めない時はエラー(もっときちんと書いた方が良いが今回は割愛)
-                    if (!is_readable($pPath)) { die($pPath); }
-
-                    //-- Content-Typeとして送信するMIMEタイプ(第2引数を渡さない場合は自動判定) ※詳細は後述
-                    $mimeType = (isset($pMimeType)) ? $pMimeType
-                                                    : (new finfo(FILEINFO_MIME_TYPE))->file($pPath);
-
-                    //-- 適切なMIMEタイプが得られない時は、未知のファイルを示すapplication/octet-streamとする
-                    if (!preg_match('/\A\S+?\/\S+/', $mimeType)) {
-                        $mimeType = 'application/octet-stream';
-                    }
-
-                    //-- Content-Type
-                    header('Content-Type: ' . $mimeType);
-
-                    //-- ウェブブラウザが独自にMIMEタイプを判断する処理を抑止する
-                    header('X-Content-Type-Options: nosniff');
-
-                    //-- ダウンロードファイルのサイズ
-                    header('Content-Length: ' . filesize($pPath));
-
-                    //-- ダウンロード時のファイル名
-                    header('Content-Disposition: attachment; filename="' . basename($pPath) . '"');
-
-                    //-- keep-aliveを無効にする
-                    header('Connection: close');
-
-                    //-- readfile()の前に出力バッファリングを無効化する ※詳細は後述
-                    while (ob_get_level()) { ob_end_clean(); }
-
-                    //-- 出力
-                    readfile($pPath);
-
-                    //-- 最後に終了させるのを忘れない
-                    exit;
-                }
-                if(isset($_POST['howmany'])) {
-                    $conn = pg_connect(getenv("DATABASE_URL"));
-                    // SQLで情報を取得
-                    $package_query = pg_query($conn, 'select Package_query from url_assignment;');
-                    while ($row = pg_fetch_row($package_query)) {
-                        $package_query_result = $row[0];
-                    }
-                    $single_query = pg_query($conn, "select Single_query from url_assignment;");
-                    while ($row = pg_fetch_row($single_query)) {
-                        $single_query_result = $row[0];
-                    }
-
-                    //ここで取得したQueryはString表記なのでArrayにする。
-                    $package_query_result = explode("},{",substr($package_query_result, 2, strlen($package_query_result)-4));
-                    //Packageについては、各要素がArrayであってほしいので、更に各要素をexplode.
-                    for($i = 0; $i < count($package_query_result); $i++){
-                        $package_query_result[$i] = explode("," , $package_query_result[$i]);
-                    }
-
-                    $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
-
-                    // 単位数の選択によって分岐
-                    $ratio_value = $_POST["howmany"];
-                    switch($ratio_value){
-                        case 1:
-                            // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
-                            if(count($single_query_result) == 1){
-                                // package_query_resultに、Queryが残っているかチェック
-                                if(in_array("first", end($package_query_result))){
-                                    $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
-                                    echo $alert;
-                                    break;
-                                }else{
-                                    // package_query_resultの最後の要素をunpack
-                                    // 今回発行しないほうをsingleに追加
-                                    array_push($single_query_result, end($package_query_result)[0]);
-                                    $pick_url = end($package_query_result)[1];
-                                    $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
-                                    $context .= $pick_url;
-                                    $context .= "-home.html?";
-                                    //text ファイル出力
-                                    if(isset($_POST["url_assignment"])){
-                                         //ダウンロードダイアログを開くよう、header関数を利用して指示します。
-                                         $file_handle = fopen("/実験アクセス用URL記述ファイル-1単位.txt", "a+");
-                                         fwrite($file_handle , $context);
-                                         fclose($file_handle);
-                                         download("/実験アクセス用URL記述ファイル-1単位.txt");
-                                    }
-                                    break;
-                                }
-                            }else{
-                                break;
-                            }
-                        case 2:
-                            break;
-                    }
-                }else{
-                    $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
-                    echo $alert;
-                }
-        ?>
 </head>
 <body>
     <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
@@ -221,5 +121,105 @@
         };
         */
     </script>
+    <?php
+                function download($pPath, $pMimeType = null)
+                {
+                    //-- ファイルが読めない時はエラー(もっときちんと書いた方が良いが今回は割愛)
+                    if (!is_readable($pPath)) { die($pPath); }
+
+                    //-- Content-Typeとして送信するMIMEタイプ(第2引数を渡さない場合は自動判定) ※詳細は後述
+                    $mimeType = (isset($pMimeType)) ? $pMimeType
+                                                    : (new finfo(FILEINFO_MIME_TYPE))->file($pPath);
+
+                    //-- 適切なMIMEタイプが得られない時は、未知のファイルを示すapplication/octet-streamとする
+                    if (!preg_match('/\A\S+?\/\S+/', $mimeType)) {
+                        $mimeType = 'application/octet-stream';
+                    }
+
+                    //-- Content-Type
+                    header('Content-Type: ' . $mimeType);
+
+                    //-- ウェブブラウザが独自にMIMEタイプを判断する処理を抑止する
+                    header('X-Content-Type-Options: nosniff');
+
+                    //-- ダウンロードファイルのサイズ
+                    header('Content-Length: ' . filesize($pPath));
+
+                    //-- ダウンロード時のファイル名
+                    header('Content-Disposition: attachment; filename="' . basename($pPath) . '"');
+
+                    //-- keep-aliveを無効にする
+                    header('Connection: close');
+
+                    //-- readfile()の前に出力バッファリングを無効化する ※詳細は後述
+                    while (ob_get_level()) { ob_end_clean(); }
+
+                    //-- 出力
+                    readfile($pPath);
+
+                    //-- 最後に終了させるのを忘れない
+                    exit;
+                }
+                if(isset($_POST['howmany'])) {
+                    $conn = pg_connect(getenv("DATABASE_URL"));
+                    // SQLで情報を取得
+                    $package_query = pg_query($conn, 'select Package_query from url_assignment;');
+                    while ($row = pg_fetch_row($package_query)) {
+                        $package_query_result = $row[0];
+                    }
+                    $single_query = pg_query($conn, "select Single_query from url_assignment;");
+                    while ($row = pg_fetch_row($single_query)) {
+                        $single_query_result = $row[0];
+                    }
+
+                    //ここで取得したQueryはString表記なのでArrayにする。
+                    $package_query_result = explode("},{",substr($package_query_result, 2, strlen($package_query_result)-4));
+                    //Packageについては、各要素がArrayであってほしいので、更に各要素をexplode.
+                    for($i = 0; $i < count($package_query_result); $i++){
+                        $package_query_result[$i] = explode("," , $package_query_result[$i]);
+                    }
+
+                    $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
+
+                    // 単位数の選択によって分岐
+                    $ratio_value = $_POST["howmany"];
+                    switch($ratio_value){
+                        case 1:
+                            // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
+                            if(count($single_query_result) == 1){
+                                // package_query_resultに、Queryが残っているかチェック
+                                if(in_array("first", end($package_query_result))){
+                                    $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
+                                    echo $alert;
+                                    break;
+                                }else{
+                                    // package_query_resultの最後の要素をunpack
+                                    // 今回発行しないほうをsingleに追加
+                                    array_push($single_query_result, end($package_query_result)[0]);
+                                    $pick_url = end($package_query_result)[1];
+                                    $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
+                                    $context .= $pick_url;
+                                    $context .= "-home.html?";
+                                    //text ファイル出力
+                                    if(isset($_POST["url_assignment"])){
+                                         //ダウンロードダイアログを開くよう、header関数を利用して指示します。
+                                         $file_handle = fopen("/実験アクセス用URL記述ファイル-1単位.txt", "a+");
+                                         fwrite($file_handle , $context);
+                                         fclose($file_handle);
+                                         download("/実験アクセス用URL記述ファイル-1単位.txt");
+                                    }
+                                    break;
+                                }
+                            }else{
+                                break;
+                            }
+                        case 2:
+                            break;
+                    }
+                }else{
+                    $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
+                    echo $alert;
+                }
+    ?>
 </body>
 </html>
