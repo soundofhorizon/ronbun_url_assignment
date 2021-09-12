@@ -36,6 +36,10 @@
 
         //ここで取得したQueryはString表記なのでArrayにする。
         $package_query_result = explode("},{",substr($package_query_result, 2, strlen($package_query_result)-4));
+        //Packageについては、各要素がArrayであってほしいので、更に各要素をexplode.
+        for($i = 0; $i < count($package_query_result); $i++){
+            $package_query_result[$i] = explode("," , $package_query_result[$i]);
+        }
 
         var_dump($package_query_result);
 
