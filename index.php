@@ -107,6 +107,7 @@
 
             // Update DATABASE Package
             for(let i=0; i<package_query.length; i++){
+                package_query[i] = package_query[i].split(",");
                 package_query[i] = "ARRAY['" + package_query[i][0] + "','" + package_query[i][1] + "']";
             }
             package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" + package_query + "];"
