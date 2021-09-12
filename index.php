@@ -189,16 +189,14 @@
                                 </p>
                                 EOF;
 
-                                $tcpdf->writeHTML($html);
-                                $tcpdf->Output('samurai.pdf', 'D'); // 第二引数をDに変更する
+                                $tcpdf->writeHTML($html); // 表示htmlを設定
+                                $tcpdf->Output('samurai.pdf', 'I'); // pdf表示設定
                                 break;
                             }
                         }else{
-                            echo "到達してます2";
                             break;
                         }
                     case 2:
-                        echo "到達してます3";
                         break;
                 }
             }else{
