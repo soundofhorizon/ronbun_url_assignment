@@ -34,6 +34,9 @@
             $single_query_result = $row[0];
         }
 
+        //ここで取得したQueryはString表記なのでArrayにする。
+        $package_query_result = explode(",",substr($package_query_result, 1, strlen($package_query_result)-2));
+
         var_dump($package_query_result);
 
         // 単位数の選択によって分岐
