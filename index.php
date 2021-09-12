@@ -86,7 +86,7 @@
                                               require 'vendor/autoload.php';
 
                                               $email = new \SendGrid\Mail\Mail();
-                                              $email->setFrom("url_assignment_agent@example.com", "Example User");
+                                              $email->setFrom("b9p31013@bunkyo.ac.jp", "Example User");
                                               $email->setSubject("Hello from SendGrid");
                                               $email->addTo("b9p31013@bunkyo.ac.jp", "Example User");
                                               $email->addContent("text/plain", "Hello world");
