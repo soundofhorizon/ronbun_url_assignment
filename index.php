@@ -112,20 +112,9 @@
             }
             var package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" + package_query + "];"
 
-            // Update DATABASE Query
-            $.ajax({
-                type: "POST", //　GETでも可
-                url: "update.php", //　送り先
-                data: { 'package_sql': package_sql, 'single_sql': single_sql }, //　渡したいデータをオブジェクトで渡す
-                dataType : "json", //　データ形式を指定
-                scriptCharset: 'utf-8' //　文字コードを指定
-            })
-            .then(
-                function(param){　 //　paramに処理後のデータが入って戻ってくる
-                    console.log(param); //　帰ってきたら実行する処理
-                },
-                function(XMLHttpRequest, textStatus, errorThrown){ //　エラーが起きた時はこちらが実行される
-                    console.log(XMLHttpRequest); //　エラー内容表示
+            var exec = require('child_process').exec;
+            exec('python -c "import update; update.update_sql_execute()', function(err, stdout, stderr){
+              if (err) { console.log(err); }
             });
 
             frag = false;
