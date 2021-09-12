@@ -167,8 +167,8 @@
                                 file_put_contents($filename, $context);
 
                                 header("Content-type: text/plain");
-                                header("Content-Disposition: attachment; filename=$file");
-                                readfile($file);
+                                header("Content-Disposition: attachment; filename=$filename");
+                                readfile($filename);
                                 break;
                             }
                         }else{
