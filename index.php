@@ -41,7 +41,7 @@
             $package_query_result[$i] = explode("," , $package_query_result[$i]);
         }
 
-        $single_query_result = explode("," , $single_query_result);
+        $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
 
         var_dump($single_query_result);
 
@@ -49,7 +49,27 @@
         $ratio_value = $_GET["howmany"];
         switch($ratio_value){
             case 1:
-                break;
+                // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
+                if(count($single_query_result) == 1){
+                    // package_query_resultに、Queryが残っているかチェック
+                    if(in_array("first", end($package_query_result))){
+                        $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
+                        echo $alert;
+                    }else{
+                        // package_query_resultの最後の要素をunpack
+                        // 今回発行しないほうをsingleに追加
+                        array_push($single_query_result, end($package_query_result)[0]);
+                        $pick_url = end($package_query_result)[1];
+                        $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/"+$pick_url+"-home.html?";
+                        //ファイル出力
+                        $fileName = "実験アクセス用URL記述ファイル-1単位.txt";
+                        header('Content-Type: text/plain');
+                        header('Content-Disposition: attachment; filename='.$fileName);
+                        echo mb_convert_encoding($context, "SJIS", "UTF-8");  //←UTF-8のままで良ければ不要です。
+                    }
+                }else{
+                    break;
+                }
             case 2:
                 break;
         }
