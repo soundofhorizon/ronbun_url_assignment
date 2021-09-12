@@ -1,0 +1,19 @@
+{
+  "name": "ronbun_url_assignment",
+  "version": "1.0.0",
+  "description": "this is first example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soundofhorizon/ronbun_url_assignment.git"
+  },
+  "author": "soundofhorizon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soundofhorizon/ronbun_url_assignment/issues"
+  },
+  "homepage": "https://github.com/soundofhorizon/ronbun_url_assignment#readme"
+}
