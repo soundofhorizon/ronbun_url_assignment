@@ -7,24 +7,24 @@ const client = new Client({
 
 client.connect();
 
-$("#url_assignment_button").on("click", function()  {
+$("#url_assignment_button").on("click", function()){
             if (document.getElementById('myText').value == "" || document.getElementById('myText').value == null)  {
                 alert("学籍番号が入力されていません。入力した後再度URL発行をお試しください。");
                 return
             }
 
-           client.query('select Package_query from url_assignment;', (err, res) => {
-             if (err) throw err;
-             for (let row of res.rows) {
-               console.log(JSON.stringify(row));
-             }
-             client.end();
-           });
+            client.query('select Package_query from url_assignment;', (err, res) => {
+              if (err) throw err;
+              for (let row of res.rows) {
+                console.log(JSON.stringify(row));
+              }
+              client.end();
+            });
 
-           package_query = package_query.replace("{{", "").replace("}}", "").split("},{");
-           single_query = single_query.replace("{", "").replace("}", "").split(",");
+            package_query = package_query.replace("{{", "").replace("}}", "").split("},{");
+            single_query = single_query.replace("{", "").replace("}", "").split(",");
 
-           let howmanyunit = document.getElementsByName('howmany');
+            let howmanyunit = document.getElementsByName('howmany');
             if (howmanyunit.item(0).checked){
                 if(single_query.length == 1){
                     // unpack
