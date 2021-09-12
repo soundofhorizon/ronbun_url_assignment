@@ -7,7 +7,7 @@ const client = new Client({
 
 client.connect();
 
-$("#url_assignment_button").on("click", function()){
+$("#url_assignment_button").on("click", function(){
             if (document.getElementById('myText').value == "" || document.getElementById('myText').value == null)  {
                 alert("学籍番号が入力されていません。入力した後再度URL発行をお試しください。");
                 return
@@ -79,7 +79,7 @@ $("#url_assignment_button").on("click", function()){
             });
 
             frag = false;
-}
+)};
 
 function downloadAsTextFile( fileName, content ) {
             const BLOB              = new Blob( [ content ], { 'type': 'text/plain' } );
