@@ -135,7 +135,7 @@
                 $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_query_result . "];";
                 var_dump($single_sql);
                 for($i = 0; $i < count($package_query_result); $i++){
-                    $package_query_result[i] = "ARRAY['" . $package_query_result[i][0] . "','" . $package_query_result[i][1] . "']";
+                    $package_query_result[$i] = "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "']";
                 }
                 $package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" . $package_query_result . "];";
                 var_dump($package_sql);
