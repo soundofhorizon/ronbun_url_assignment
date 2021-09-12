@@ -163,13 +163,12 @@
                                 $context .= $pick_url;
                                 $context .= "-home.html?";
                                 //text ファイル出力
-                                $filename = "実験アクセス用URL記述ファイル-1単位";
+                                $filename = "実験アクセス用URL記述ファイル-1単位.txt";
                                 file_put_contents($filename, $context);
 
-                                header('Content-Type: application/octet-stream');
-                                header("Content-Disposition: attachment; filename=$filename");
-
-                                readfile($filename);
+                                header("Content-type: text/plain");
+                                header("Content-Disposition: attachment; filename=$file");
+                                readfile($file);
                                 break;
                             }
                         }else{
