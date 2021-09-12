@@ -149,6 +149,8 @@
                 if (!$result_flag_package) {
                     die('Package INSERTクエリーが失敗しました。'.pg_last_error());
                 }
+                var_dump($package_sql);
+                var_dump($single_sql);
             }else{
                 $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
                 echo $alert;
