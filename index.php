@@ -102,7 +102,7 @@
             for(let i=0; i<single_query.length; i++){
                 single_query[i] = "'" + single_query[i] + "'"
             }
-            single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" single_query  "];"
+            single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" + single_query + "];"
             alert(single_sql);
 
             frag = false;
