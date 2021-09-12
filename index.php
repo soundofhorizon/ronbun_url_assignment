@@ -1,7 +1,5 @@
 <?php
         $conn = pg_connect(getenv("DATABASE_URL"));
-        $package_query = pg_query($conn, "select Package_query from url_assignment;");
-        $single_query = pg_query($conn, "select Single_query from url_assignment;");
  ?>
 <html lang="en">
 <head>
@@ -47,12 +45,16 @@
                 return
             }
 
-           var package_query = "<?php while ($row = pg_fetch_row($package_query)) {
+           var package_query = "<?php
+                                     $package_query = pg_query($conn, 'select Package_query from url_assignment;');
+                                     while ($row = pg_fetch_row($package_query)) {
                                        echo $row[0];
                                      }
                                 ?>";
 
-           var single_query = '<?php while ($row = pg_fetch_row($single_query)) {
+           var single_query = '<?php
+                                     $single_query = pg_query($conn, "select Single_query from url_assignment;");
+                                     while ($row = pg_fetch_row($single_query)) {
                                        echo $row[0];
                                      }
                                 ?>';
