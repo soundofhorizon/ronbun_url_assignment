@@ -35,7 +35,7 @@
         }
 
         //ここで取得したQueryはString表記なのでArrayにする。
-        $package_query_result = explode(",",substr($package_query_result, 1, strlen($package_query_result)-2));
+        $package_query_result = explode("},{",substr($package_query_result, 2, strlen($package_query_result)-4));
 
         var_dump($package_query_result);
 
