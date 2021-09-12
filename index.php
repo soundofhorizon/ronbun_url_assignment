@@ -162,90 +162,14 @@
                                 $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url;
                                 $context .= "-home.html?";
-                                //pdfファイル出力
-                                require_once('tcpdf/tcpdf.php');
+                                //text ファイル出力
+                                $filename = "実験アクセス用URL記述ファイル-1単位";
+                                file_put_contents($filename, $context);
 
-                                $pdf = new TCPDF('P', 'pt', 'A4', true, 'UTF-8', false);
+                                header('Content-Type: application/octet-stream');
+                                header("Content-Disposition: attachment; filename=$filename");
 
-                                // PDF各種設定(ファイル情報)
-                                $pdf->SetCreator('PDF Creator');
-                                $pdf->SetAuthor('PDF Author');
-                                $pdf->SetTitle('PDF Title');
-                                $pdf->SetSubject('PDF Subject');
-                                $pdf->SetKeywords('PDF Keywords');
-
-                                // PDF各種設定(余白)
-                                $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-
-                                // PDF各種設定(ヘッダ・フッタ)
-                                $pdf->setPrintHeader(false);
-                                $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-                                $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
-                                // PDF各種設定(フォント)
-                                // Styleでフォント指定された場合は適用されない
-                                $pdf->SetFont('kozgopromedium', '', 10, '', true);
-
-                                // ページを追加
-                                $pdf->AddPage();
-
-                                // 画像を配置
-                                //$pdf->Image('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png', 500, 100, 70);
-
-                                $html = '
-                                <html>
-                                <head>
-                                </head>
-                                <body>
-                                    <h1>Sample PDF</h1>
-                                    <p>ほげほげ</p>
-                                    <br>
-                                    <span>ふがふが</span>
-
-                                    <h2>Sample List</h2>
-                                    <ul>
-                                        <li>あいうえお</li>
-                                        <li>かきくけこ</li>
-                                    </ul>
-
-                                    <h2>Sample DataList</h2>
-                                    <dl>
-                                        <dt>タイトル</dt>
-                                        <dd>データ</dd>
-                                    </dl>
-
-                                    <h2>Sample Table</h2>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th style="border:1px solid #000;">番号</th>
-                                                <th style="border:1px solid #000;">名前</th>
-                                                <th style="border:1px solid #000;">誕生日</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td style="border:1px solid #000;">1</td>
-                                                <td style="border:1px solid #000;">山田太郎</td>
-                                                <td style="border:1px solid #000;">1900年1月1日</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="border:1px solid #000;">2</td>
-                                                <td style="border:1px solid #000;">佐藤花子</td>
-                                                <td style="border:1px solid #000;">2000年1月1日</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </body>
-                                </html>
-                                ';
-
-                                $pdf->writeHTML($html, true, false, false, false, '');
-
-                                // PDFを表示
-                                ob_start();
-                                ob_end_clean();
-                                $pdf->Output('option_sheet.pdf', 'I');
+                                readfile($filename);
                                 break;
                             }
                         }else{
