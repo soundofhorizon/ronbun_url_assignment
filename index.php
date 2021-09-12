@@ -84,10 +84,10 @@
                                         //text ファイル出力
                                         if(isset($_POST["url_assignment"])){
                                              //ダウンロードダイアログを開くよう、header関数を利用して指示します。
-                                             $file_handle = fopen("tmp/実験アクセス用URL記述ファイル-1単位.txt", "w");
+                                             $file_handle = fopen("app/実験アクセス用URL記述ファイル-1単位.txt", "w");
                                              fwrite($file_handle , $context);
                                              fclose($file_handle);
-                                             download("tmp/実験アクセス用URL記述ファイル-1単位.txt");
+                                             download("app/実験アクセス用URL記述ファイル-1単位.txt");
                                         }
                                         break;
                                     }
