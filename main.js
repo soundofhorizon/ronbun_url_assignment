@@ -1,22 +1,25 @@
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+client.connect();
+
 $("#url_assignment_button").on("click", function()  {
             if (document.getElementById('myText').value == "" || document.getElementById('myText').value == null)  {
                 alert("学籍番号が入力されていません。入力した後再度URL発行をお試しください。");
                 return
             }
 
-           var package_query = "<?php
-                                     $package_query = pg_query($conn, 'select Package_query from url_assignment;');
-                                     while ($row = pg_fetch_row($package_query)) {
-                                       echo $row[0];
-                                     }
-                                ?>";
-
-           var single_query = '<?php
-                                     $single_query = pg_query($conn, "select Single_query from url_assignment;");
-                                     while ($row = pg_fetch_row($single_query)) {
-                                       echo $row[0];
-                                     }
-                                ?>';
+           client.query('select Package_query from url_assignment;', (err, res) => {
+             if (err) throw err;
+             for (let row of res.rows) {
+               console.log(JSON.stringify(row));
+             }
+             client.end();
+           });
 
            package_query = package_query.replace("{{", "").replace("}}", "").split("},{");
            single_query = single_query.replace("{", "").replace("}", "").split(",");
