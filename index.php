@@ -96,7 +96,7 @@
                       case 2:
                                // '""'の要素は削除
                               unset($package_query_result[0]);
-                              $index = rand(0, count($package_query_result);
+                              $index = rand(0, count($package_query_result));
                               $pick_url = $package_query_result[$index];
                               unset($package_query_result[$index]);
                               array_unshift($package_query_result, array("first", "endpoint"));
