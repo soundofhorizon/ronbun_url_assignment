@@ -24,6 +24,8 @@
 
                 $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
 
+                var_dump($single_query_result);
+
                 // 単位数の選択によって分岐
                 $ratio_value = $_POST["howmany"];
                 switch($ratio_value){
