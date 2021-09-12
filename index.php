@@ -102,16 +102,30 @@
             for(let i=0; i<single_query.length; i++){
                 single_query[i] = "'" + single_query[i] + "'";
             }
-            single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" + single_query + "];";
-            alert(single_sql);
+            var single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" + single_query + "];";
 
             // Update DATABASE Package
             for(let i=0; i<package_query.length; i++){
                 package_query[i] = package_query[i].split(",");
                 package_query[i] = "ARRAY['" + package_query[i][0] + "','" + package_query[i][1] + "']";
             }
-            package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" + package_query + "];"
-            alert(package_sql);
+            var package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" + package_query + "];"
+
+            // Update DATABASE Query
+            $.ajax({
+                type: "POST", //　GETでも可
+                url: "update.php", //　送り先
+                data: { 'package_sql': package_sql, 'single_sql': single_sql }, //　渡したいデータをオブジェクトで渡す
+                dataType : "json", //　データ形式を指定
+                scriptCharset: 'utf-8' //　文字コードを指定
+            })
+            .then(
+                function(param){　 //　paramに処理後のデータが入って戻ってくる
+                    console.log(param); //　帰ってきたら実行する処理
+                },
+                function(XMLHttpRequest, textStatus, errorThrown){ //　エラーが起きた時はこちらが実行される
+                    console.log(XMLHttpRequest); //　エラー内容表示
+            });
 
             frag = false;
         }
