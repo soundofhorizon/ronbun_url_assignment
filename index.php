@@ -52,8 +52,11 @@
                     echo "到達してます3";
                     break;
             }
+        }else{
+            $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
+            echo $alert;
         }
-    ?>
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
