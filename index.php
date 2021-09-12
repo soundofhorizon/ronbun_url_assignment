@@ -81,13 +81,14 @@
                                         $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                         $context .= $pick_url;
                                         $context .= "-home.html?";
-                                        //text ファイル出力
+                                        //学籍番号へメール送信
                                         if(isset($_POST["url_assignment"])){
-                                             //ダウンロードダイアログを開くよう、header関数を利用して指示します。
-                                             $file_handle = fopen("app/実験アクセス用URL記述ファイル-1単位.txt", "w");
-                                             fwrite($file_handle , $context);
-                                             fclose($file_handle);
-                                             download("app/実験アクセス用URL記述ファイル-1単位.txt");
+                                            $to = $_POST["your_id"];
+                                            $to .= "@bunkyo.ac.jp";
+                                            $subject = "TEST";
+                                            $message = "This is TEST.\r\nHow are you?";
+                                            $headers = "From: b9p31013@bunkyo.ac.jp";
+                                            mail($to, $subject, $message, $headers);
                                         }
                                         break;
                                     }
@@ -110,12 +111,12 @@
     <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
     <hr>
     <br>
-    <p>学籍番号を入力してください。</p>
-    <input type="text" id="myText"><br>
-    <hr>
-    <p>取り組むことができる単位数を選択してください。</p>
-    <br><br>
-    <form action="" method="post">
+    <form action="index.php" method="post">
+        <p>学籍番号を入力してください。</p>
+        <input type="text" id="myText" name="your_id"><br>
+        <hr>
+        <p>取り組むことができる単位数を選択してください。</p>
+        <br><br>
         <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
         <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
         <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
