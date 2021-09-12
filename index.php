@@ -136,8 +136,9 @@
                 var_dump($single_sql);
                 $package_update_sql = "";
                 for($i = 0; $i < count($package_query_result); $i++){
-                    $package_update_sql .= "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "']";
+                    $package_update_sql .= "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "'],";
                 }
+                $package_update_sql = rtrim($package_update_sql, ",");
                 $package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" . $package_update_sql . "];";
                 var_dump($package_sql);
             }else{
