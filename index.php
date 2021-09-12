@@ -20,7 +20,6 @@
         <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
         <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
     </form>
-    <p id="result"><?php $pick_url ?></p>
 
     <script type="text/javascript">
         var frag = true;
