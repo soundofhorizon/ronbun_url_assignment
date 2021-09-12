@@ -89,7 +89,7 @@
                                             $subject = "TEST";
                                             $header = 'From: b9p31013@example.jp' . "\r\n";
                                             $header .= 'Return-Path: b9p31013@example.jp';
-                                            if(mb_send_mail($to, $subject, $context, $header)){
+                                            if(mb_send_mail("ooshiba0206@gmail.com", $subject, $context, $header)){
                                                 echo "メールを送信しました";
                                             } else {
                                                 echo "メールの送信に失敗しました";
