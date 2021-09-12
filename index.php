@@ -1,53 +1,55 @@
 <?php
-        $conn = pg_connect(getenv("DATABASE_URL"));
-        // SQLで情報を取得
-        $package_query = pg_query($conn, 'select Package_query from url_assignment;');
-        while ($row = pg_fetch_row($package_query)) {
-            $package_query_result = $row[0];
-        }
-        $single_query = pg_query($conn, "select Single_query from url_assignment;");
-        while ($row = pg_fetch_row($single_query)) {
-            $single_query_result = $row[0];
-        }
+        if(isset($_POST['url_assignment'])) {
+            $conn = pg_connect(getenv("DATABASE_URL"));
+            // SQLで情報を取得
+            $package_query = pg_query($conn, 'select Package_query from url_assignment;');
+            while ($row = pg_fetch_row($package_query)) {
+                $package_query_result = $row[0];
+            }
+            $single_query = pg_query($conn, "select Single_query from url_assignment;");
+            while ($row = pg_fetch_row($single_query)) {
+                $single_query_result = $row[0];
+            }
 
-        //ここで取得したQueryはString表記なのでArrayにする。
-        $package_query_result = explode("},{",substr($package_query_result, 2, strlen($package_query_result)-4));
-        //Packageについては、各要素がArrayであってほしいので、更に各要素をexplode.
-        for($i = 0; $i < count($package_query_result); $i++){
-            $package_query_result[$i] = explode("," , $package_query_result[$i]);
-        }
+            //ここで取得したQueryはString表記なのでArrayにする。
+            $package_query_result = explode("},{",substr($package_query_result, 2, strlen($package_query_result)-4));
+            //Packageについては、各要素がArrayであってほしいので、更に各要素をexplode.
+            for($i = 0; $i < count($package_query_result); $i++){
+                $package_query_result[$i] = explode("," , $package_query_result[$i]);
+            }
 
-        $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
+            $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
 
-        var_dump($single_query_result);
+            var_dump($single_query_result);
 
-        // 単位数の選択によって分岐
-        $ratio_value = $_GET["howmany"];
-        switch($ratio_value){
-            case 1:
-                // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
-                if(count($single_query_result) == 1){
-                    // package_query_resultに、Queryが残っているかチェック
-                    if(in_array("first", end($package_query_result))){
-                        $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
-                        echo $alert;
+            // 単位数の選択によって分岐
+            $ratio_value = $_GET["howmany"];
+            switch($ratio_value){
+                case 1:
+                    // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
+                    if(count($single_query_result) == 1){
+                        // package_query_resultに、Queryが残っているかチェック
+                        if(in_array("first", end($package_query_result))){
+                            $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
+                            echo $alert;
+                        }else{
+                            // package_query_resultの最後の要素をunpack
+                            // 今回発行しないほうをsingleに追加
+                            array_push($single_query_result, end($package_query_result)[0]);
+                            $pick_url = end($package_query_result)[1];
+                            $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/"+$pick_url+"-home.html?";
+                            //ファイル出力
+                            $fileName = "実験アクセス用URL記述ファイル-1単位.txt";
+                            header('Content-Type: text/plain');
+                            header('Content-Disposition: attachment; filename='.$fileName);
+                            echo mb_convert_encoding($context, "SJIS", "UTF-8");  //←UTF-8のままで良ければ不要です。
+                        }
                     }else{
-                        // package_query_resultの最後の要素をunpack
-                        // 今回発行しないほうをsingleに追加
-                        array_push($single_query_result, end($package_query_result)[0]);
-                        $pick_url = end($package_query_result)[1];
-                        $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/"+$pick_url+"-home.html?";
-                        //ファイル出力
-                        $fileName = "実験アクセス用URL記述ファイル-1単位.txt";
-                        header('Content-Type: text/plain');
-                        header('Content-Disposition: attachment; filename='.$fileName);
-                        echo mb_convert_encoding($context, "SJIS", "UTF-8");  //←UTF-8のままで良ければ不要です。
+                        break;
                     }
-                }else{
+                case 2:
                     break;
-                }
-            case 2:
-                break;
+            }
         }
     ?>
 <html lang="en">
@@ -70,7 +72,7 @@
     <form action="index.php" method="post">
         <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
         <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
-        <input type="submit" id="url_assignment_button" onclick="URLassignment()" style="display: none;" value="URL発行" />
+        <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
     </form>
     <p id="result"></p>
 
