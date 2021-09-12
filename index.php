@@ -55,7 +55,7 @@
                });
 
                client.connect();
-           };
+           });
 
            var package_query = "<?php
                                      $package_query = pg_query($conn, 'select Package_query from url_assignment;');
