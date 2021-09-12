@@ -25,6 +25,13 @@
     <button id="url_assignment_button" onclick="URLassignment()" style="display: none;">URL発行</button>
     <p id="result"></p>
 
+    <?php
+        $package_query = pg_query($conn, 'select Package_query from url_assignment;');
+        while ($row = pg_fetch_row($package_query)) {
+            echo $row[0];
+        }
+    ?>
+
     <script type="text/javascript">
         var frag = true;
         function putRatio(){
@@ -47,16 +54,8 @@
                 return
             }
 
-           const { Client } = require(['pg'], function(){
-
-               const client = new Client({
-                 connectionString: process.env.DATABASE_URL,
-                 ssl: true,
-               });
-
-               client.connect();
-           });
-
+        }
+        /*
            var package_query = "<?php
                                      $package_query = pg_query($conn, 'select Package_query from url_assignment;');
                                      while ($row = pg_fetch_row($package_query)) {
@@ -146,6 +145,7 @@
 
             TEMP_ANCHOR.dispatchEvent( new MouseEvent( 'click' ) );
         };
+        */
     </script>
 </body>
 </html>
