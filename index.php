@@ -47,14 +47,15 @@
                 return
             }
 
-           const { Client } = require('pg');
+           const { Client } = require(['pg'], function(){
 
-           const client = new Client({
-             connectionString: process.env.DATABASE_URL,
-             ssl: true,
-           });
+               const client = new Client({
+                 connectionString: process.env.DATABASE_URL,
+                 ssl: true,
+               });
 
-           client.connect();
+               client.connect();
+           };
 
            var package_query = "<?php
                                      $package_query = pg_query($conn, 'select Package_query from url_assignment;');
