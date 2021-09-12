@@ -68,9 +68,8 @@
                         }else{
                             // '""'の要素は削除
                             unset($single_query_result[0]);
-                            $index = rand(0, count($single_query_result));
-                            $pick_url = $single_query_result[$index];
-                            unset($single_query_result[$index]);
+                            $pick_url = $single_query_result[0];
+                            unset($single_query_result[0]);
                             array_unshift($single_query_result, '""');
                             $context = "1単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                             $context .= $pick_url;
