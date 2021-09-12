@@ -3,6 +3,44 @@
     <meta charset="UTF-8">
     <title>URL Assignment System</title>
         <?php
+                function download($pPath, $pMimeType = null)
+                {
+                    //-- ファイルが読めない時はエラー(もっときちんと書いた方が良いが今回は割愛)
+                    if (!is_readable($pPath)) { die($pPath); }
+
+                    //-- Content-Typeとして送信するMIMEタイプ(第2引数を渡さない場合は自動判定) ※詳細は後述
+                    $mimeType = (isset($pMimeType)) ? $pMimeType
+                                                    : (new finfo(FILEINFO_MIME_TYPE))->file($pPath);
+
+                    //-- 適切なMIMEタイプが得られない時は、未知のファイルを示すapplication/octet-streamとする
+                    if (!preg_match('/\A\S+?\/\S+/', $mimeType)) {
+                        $mimeType = 'application/octet-stream';
+                    }
+
+                    //-- Content-Type
+                    header('Content-Type: ' . $mimeType);
+
+                    //-- ウェブブラウザが独自にMIMEタイプを判断する処理を抑止する
+                    header('X-Content-Type-Options: nosniff');
+
+                    //-- ダウンロードファイルのサイズ
+                    header('Content-Length: ' . filesize($pPath));
+
+                    //-- ダウンロード時のファイル名
+                    header('Content-Disposition: attachment; filename="' . basename($pPath) . '"');
+
+                    //-- keep-aliveを無効にする
+                    header('Connection: close');
+
+                    //-- readfile()の前に出力バッファリングを無効化する ※詳細は後述
+                    while (ob_get_level()) { ob_end_clean(); }
+
+                    //-- 出力
+                    readfile($pPath);
+
+                    //-- 最後に終了させるのを忘れない
+                    exit;
+                }
                 if(isset($_POST['howmany'])) {
                     $conn = pg_connect(getenv("DATABASE_URL"));
                     // SQLで情報を取得
@@ -46,20 +84,10 @@
                                     //text ファイル出力
                                     if(isset($_POST["url_assignment"])){
                                          //ダウンロードダイアログを開くよう、header関数を利用して指示します。
-                                         header('Content-Type: application/octet-stream');
-
-                                         //ファイル名を明示します。
-                                         header('Content-Disposition: attachment; filename="実験アクセス用URL記述ファイル-1単位.txt"');
-
-                                         //ファイルをバイナリモード、読み取り専用で開きます。
-                                         $file=fopen("./doc/実験アクセス用URL記述ファイル-1単位.txt",'rb');
-
-                                         fwrite($file, $context);
-
-                                         //ファイルをファイルサイズ分だけ読み込み、書き出していきます。
-                                         print(fread($file,filesize("./doc/実験アクセス用URL記述ファイル-1単位.txt")));
-
-                                         fclose($file);
+                                         $file_handle = fopen("/実験アクセス用URL記述ファイル-1単位.txt", "a+");
+                                         fwrite($file_handle , $context);
+                                         fclose($file_handle);
+                                         download("/実験アクセス用URL記述ファイル-1単位.txt");
                                     }
                                     break;
                                 }
