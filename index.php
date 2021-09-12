@@ -46,9 +46,11 @@
                             echo mb_convert_encoding($context, "SJIS", "UTF-8");  //←UTF-8のままで良ければ不要です。
                         }
                     }else{
+                        echo "到達してます2";
                         break;
                     }
                 case 2:
+                    echo "到達してます3";
                     break;
             }
         }
