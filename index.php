@@ -66,10 +66,12 @@
     <input type="text" id="myText"><br>
     <hr>
     <p>取り組むことができる単位数を選択してください。</p>
-    <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
-    <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
     <br><br>
-    <button id="url_assignment_button" onclick="URLassignment()" style="display: none;">URL発行</button>
+    <form action="index.php" method="post">
+        <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
+        <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
+        <input type="submit" id="url_assignment_button" onclick="URLassignment()" style="display: none;" value="URL発行" />
+    </form>
     <p id="result"></p>
 
     <script type="text/javascript">
