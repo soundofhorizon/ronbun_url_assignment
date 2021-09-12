@@ -1,5 +1,5 @@
 <?php
-        if(isset($_POST['url_assignment'])) {
+        if(isset($_POST['howmany'])) {
             $conn = pg_connect(getenv("DATABASE_URL"));
             // SQLで情報を取得
             $package_query = pg_query($conn, 'select Package_query from url_assignment;');
