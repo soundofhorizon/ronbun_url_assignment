@@ -95,6 +95,9 @@
             document.getElementById("url_assignment_button").style.display ="none";
             document.getElementById('result').innerHTML = "<p>URLを発行し、テキストファイルとしてダウンロードしました。\n マニュアルとテキストファイルを参考して実験を進めてください。</p>";
 
+            alert(single_query);
+            alert(package_query);
+
             frag = false;
         }
 
