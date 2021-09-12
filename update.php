@@ -3,6 +3,8 @@
     $package_sql = filter_input(INPUT_POST, 'package_sql'); // 送ったデータを受け取る（GETで送った場合は、INPUT_GET）
     $single_sql = filter_input(INPUT_POST, 'single_sql');
 
+    echo json_encode($package_sql);
+
     $result_flag_package = pg_query($package_sql);
 
     if (!$result_flag_package) {
