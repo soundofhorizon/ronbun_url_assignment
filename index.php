@@ -163,11 +163,34 @@
                                 $context = "1単位分の実験参加用のURLです。以下のURLをコピーし、Google Chromeにてアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url;
                                 $context .= "-home.html?";
-                                //ファイル出力
-                                $fileName = "実験アクセス用URL記述ファイル-1単位.txt";
-                                header('Content-Type: text/plain');
-                                header('Content-Disposition: attachment; filename='.$fileName);
-                                echo $context;  //←UTF-8のままで良ければ不要です。
+                                //pdfファイル出力
+                                include "./tcpdf/tcpdf.php";
+                                $tcpdf = new TCPDF();
+                                $tcpdf->AddPage();
+
+                                $tcpdf->SetFont("kozgopromedium", "", 10);
+
+                                $html = <<< EOF
+                                <style>
+                                h1 {
+                                    font-size: 24px;
+                                    color: #ff00ff;
+                                    text-align: center;
+                                }
+                                p {
+                                    font-size: 12px;
+                                    color: #000000;
+                                    text-align: left;
+                                }
+                                </style>
+                                <h1>侍エンジニア</h1>
+                                <p>
+                                今日は侍エンジニアについてお話させていただきます。
+                                </p>
+                                EOF;
+
+                                $tcpdf->writeHTML($html);
+                                $tcpdf->Output('samurai.pdf', 'D'); // 第二引数をDに変更する
                                 break;
                             }
                         }else{
