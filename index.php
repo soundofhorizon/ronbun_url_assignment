@@ -50,8 +50,8 @@
                                               $email = new \SendGrid\Mail\Mail();
                                               $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
                                               $email->setSubject("実験アクセス用URL記述メール-1単位");
-                                              $to = $_POST["your_id"]
-                                              $to .= "@bunkyo.ac.jp"
+                                              $to = $_POST["your_id"];
+                                              $to .= "@bunkyo.ac.jp";
                                               $email->addTo($to, "参加者様");
                                               $email->addContent("text/plain", $context);
                                               $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
