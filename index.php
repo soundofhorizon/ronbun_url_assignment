@@ -22,7 +22,6 @@
 
             // 単位数の選択によって分岐
             $ratio_value = $_POST["howmany"];
-            var_dump($ratio_value);
             switch($ratio_value){
                 case 1:
                     // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
