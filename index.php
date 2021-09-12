@@ -130,8 +130,9 @@
                 // UPDATE SQL
                 $single_update_sql = "";
                 for($i = 0; $i < count($single_query_result); $i++){
-                    $single_update_sql .= "'" . $single_query_result[$i] . "'";
+                    $single_update_sql .= "'" . $single_query_result[$i] . "',";
                 }
+                $single_update_sql = rtrim($single_update_sql, ",");
                 $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_update_sql . "];";
                 var_dump($single_sql);
                 $package_update_sql = "";
