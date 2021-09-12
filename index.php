@@ -44,13 +44,23 @@
                                     $context .= $pick_url;
                                     $context .= "-home.html?";
                                     //text ファイル出力
-                                    define('FILE_NAME', '実験アクセス用URL記述ファイル-1単位.txt');
-                                    /* 新規ファイルとして書き込む */
-                                    $fp = fopen(FILE_NAME, 'w');
-                                    fwrite($fp, $context);
-                                    fclose($fp);
-                                    header('Content-Type: application/force-download');
-                                    readfile(FILE_NAME);
+                                    if(isset($_POST["url_assignment"])){
+                                         //ダウンロードダイアログを開くよう、header関数を利用して指示します。
+                                         header('Content-Type: application/octet-stream');
+
+                                         //ファイル名を明示します。
+                                         header('Content-Disposition: attachment; filename="実験アクセス用URL記述ファイル-1単位.txt"');
+
+                                         //ファイルをバイナリモード、読み取り専用で開きます。
+                                         $file=fopen("./doc/実験アクセス用URL記述ファイル-1単位.txt",'rb');
+
+                                         fwrite($file, $context);
+
+                                         //ファイルをファイルサイズ分だけ読み込み、書き出していきます。
+                                         print(fread($file,filesize("./doc/実験アクセス用URL記述ファイル-1単位.txt")));
+
+                                         fclose($file);
+                                    }
                                     break;
                                 }
                             }else{
