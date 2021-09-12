@@ -98,7 +98,11 @@
             document.getElementById('result').innerHTML = "<p>URLを発行し、テキストファイルとしてダウンロードしました。\n マニュアルとテキストファイルを参考して実験を進めてください。</p>";
 
             // Update DATABASE
-            single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" + single_query + "];"
+            // SQLのtextに対応するためにシングルクォーテーションで要素を全部囲む
+            for(let i=0; i<single_query.length; i++){
+                single_query[i] = "'" + single_query[i] + "'"
+            }
+            single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" single_query  "];"
             alert(single_sql);
 
             frag = false;
