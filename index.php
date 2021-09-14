@@ -10,6 +10,10 @@
                         echo $alert;
                         return;
                     }
+                }else{
+                    $alert = "<script type='text/javascript'>alert('学籍番号が入力されていません！再度確認してください。');</script>";
+                    echo $alert;
+                    return;
                 }
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
 
