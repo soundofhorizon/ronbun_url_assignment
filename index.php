@@ -210,57 +210,6 @@
         let elements2 = document.getElementById('twotime');
         elements1.addEventListener('change', putRatio);
         elements2.addEventListener('change', putRatio);
-
-        function URLassignment(){
-
-            if (document.getElementById('myText').value == "" || document.getElementById('myText').value == null)  {
-                alert("学籍番号が入力されていません。入力した後再度URL発行をお試しください。");
-                return
-            }
-
-        }
-        /*
-
-
-
-            // Update DATABASE Single
-            // SQLのtextに対応するためにシングルクォーテーションで要素を全部囲む
-            for(let i=0; i<single_query.length; i++){
-                single_query[i] = "'" + single_query[i] + "'";
-            }
-            var single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" + single_query + "];";
-
-            // Update DATABASE Package
-            for(let i=0; i<package_query.length; i++){
-                package_query[i] = package_query[i].split(",");
-                package_query[i] = "ARRAY['" + package_query[i][0] + "','" + package_query[i][1] + "']";
-            }
-            var package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" + package_query + "];"
-
-            var exec = require('child_process').exec;
-            exec('python -c "import update; update.update_sql_execute()', function(err, stdout, stderr){
-              if (err) { console.log(err); }
-            });
-
-            frag = false;
-        }
-
-        function downloadAsTextFile( fileName, content ) {
-            const BLOB              = new Blob( [ content ], { 'type': 'text/plain' } );
-            const CAN_USE_SAVE_BLOB = window.navigator.msSaveBlob !== undefined;
-
-            if ( CAN_USE_SAVE_BLOB ) {
-                window.navigator.msSaveBlob( BLOB, fileName );
-                return;
-            }
-
-            const TEMP_ANCHOR   = document.createElement( 'a' );
-            TEMP_ANCHOR.href    = URL.createObjectURL( BLOB );
-            TEMP_ANCHOR.setAttribute( 'download', fileName );
-
-            TEMP_ANCHOR.dispatchEvent( new MouseEvent( 'click' ) );
-        };
-        */
     </script>
 </body>
 </html>
