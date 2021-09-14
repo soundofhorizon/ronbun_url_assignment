@@ -7,12 +7,12 @@
                 if($_POST['your_id'] != $_POST["your_id_confirm"]){
                     $alert = "<script type='text/javascript'>alert('学籍番号が不一致です！再度確認してください。');</script>";
                     echo $alert;
-                    break;
+                    exit;
                 }
             }else{
                  $alert = "<script type='text/javascript'>alert('学籍番号入力欄か、確認欄に学籍番号が入力されていません。入力し直してください。');</script>";
                  echo $alert;
-                 break;
+                 exit;
             }
             if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
                 $conn = pg_connect(getenv("DATABASE_URL"));
