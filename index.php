@@ -183,10 +183,10 @@
         <br>
         <form action="index.php" method="post">
             <p>学籍番号を入力してください。</p>
-            <input type="text" id="myText" name="your_id"><br>
+            <input type="text" id="myText" name="your_id" placeholder="学籍番号を入力してください。"><br>
             <hr>
             <p>確認の為、再度学籍番号を入力してください。</p>
-            <input type="text" id="myText" name="your_id_confirm"><br>
+            <input type="text" id="myText" name="your_id_confirm" placeholder="再度、学籍番号を入力してください。"><br>
             <hr>
             <p>取り組むことができる単位数を選択してください。</p>
             <br><br>
@@ -227,8 +227,8 @@
         let elements2 = document.getElementById('twotime');
         elements1.addEventListener('change', putRatio);
         elements2.addEventListener('change', putRatio);
-        nameText_1.addEventListener('change', buttonfrag_check);
-        nameText_2.addEventListener('change', buttonfrag_check);
+        nameText_1?.addEventListener('change', buttonfrag_check);
+        nameText_2?.addEventListener('change', buttonfrag_check);
     </script>
 </body>
 </html>
