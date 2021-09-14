@@ -24,8 +24,6 @@
 
                 $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
 
-                var_dump($single_query_result);
-
                 // 単位数の選択によって分岐
                 $ratio_value = $_POST["howmany"];
                 switch($ratio_value){
@@ -161,22 +159,24 @@
         ?>
 </head>
 <body>
-    <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
-    <p>選択した数のURLが発行され、そのURLが記載されたファイルがpdf形式でダウンロードされます。</p>
-    <p>ダウンロードされたファイルを開き、その後の作業を進めてください。</p>
-    <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
-    <hr>
-    <br>
-    <form action="index.php" method="post">
-        <p>学籍番号を入力してください。</p>
-        <input type="text" id="myText" name="your_id"><br>
+    <center>
+        <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
+        <p>選択した数のURLが発行され、そのURLが記載されたファイルがpdf形式でダウンロードされます。</p>
+        <p>ダウンロードされたファイルを開き、その後の作業を進めてください。</p>
+        <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
         <hr>
-        <p>取り組むことができる単位数を選択してください。</p>
-        <br><br>
-        <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
-        <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
-        <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
-    </form>
+        <br>
+        <form action="index.php" method="post">
+            <p>学籍番号を入力してください。</p>
+            <input type="text" id="myText" name="your_id"><br>
+            <hr>
+            <p>取り組むことができる単位数を選択してください。</p>
+            <br><br>
+            <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
+            <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
+            <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
+        </form>
+    </center>
 
     <script type="text/javascript">
         var frag = true;
