@@ -3,6 +3,17 @@
     <meta charset="UTF-8">
     <title>URL Assignment System</title>
         <?php
+            if(isset($_POST['your_id'])&&isset($_POST["your_id_confirm"])){
+                if($_POST['your_id'] != $_POST["your_id_confirm"]){
+                    $alert = "<script type='text/javascript'>alert('学籍番号が不一致です！再度確認してください。');</script>";
+                    echo $alert;
+                    break;
+                }
+            }else{
+                 $alert = "<script type='text/javascript'>alert('学籍番号入力欄か、確認欄に学籍番号が入力されていません。入力し直してください。');</script>";
+                 echo $alert;
+                 break;
+            }
             if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
                 $conn = pg_connect(getenv("DATABASE_URL"));
                 // SQLで情報を取得
@@ -163,12 +174,15 @@
         <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
         <p>選択した数のURLが発行され、そのURLが記載されたファイルがpdf形式でダウンロードされます。</p>
         <p>ダウンロードされたファイルを開き、その後の作業を進めてください。</p>
-        <p>2単位まで受けることが可能です。1単位を選択した場合、さらに1単位を受けることはできません。</p>
+        <p>実験は2つまで受けることが可能です。受ける実験の数で1つを選択した場合、さらに1つ実験を受けることはできません。</p>
         <hr>
         <br>
         <form action="index.php" method="post">
             <p>学籍番号を入力してください。</p>
             <input type="text" id="myText" name="your_id"><br>
+            <hr>
+            <p>確認の為、再度学籍番号を入力してください。</p>
+            <input type="text" id="myText" name="your_id_confirm"><br>
             <hr>
             <p>取り組むことができる単位数を選択してください。</p>
             <br><br>
