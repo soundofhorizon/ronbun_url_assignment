@@ -183,10 +183,10 @@
         <br>
         <form action="index.php" method="post">
             <p>学籍番号を入力してください。</p>
-            <input type="text" id="myText" name="your_id" placeholder="学籍番号を入力してください。"><br>
+            <input type="text" id="myText1" name="your_id" placeholder="学籍番号を入力してください。"><br>
             <hr>
             <p>確認の為、再度学籍番号を入力してください。</p>
-            <input type="text" id="myText" name="your_id_confirm" placeholder="再度、学籍番号を入力してください。"><br>
+            <input type="text" id="myText2" name="your_id_confirm" placeholder="再度、学籍番号を入力してください。"><br>
             <hr>
             <p>取り組むことができる単位数を選択してください。</p>
             <br><br>
@@ -199,8 +199,8 @@
 
     <script type="text/javascript">
         var frag = false;
-        let nameText_1 = document.getElementById('your_id');
-        let nameText_2 = document.getElementById('your_id_confirm');
+        let nameText_1 = document.getElementById('MyText1');
+        let nameText_2 = document.getElementById('MyText2');
         let frag_check = document.getElementById('check_frag');
         function putRatio(){
             let elements = document.getElementsByName('howmany');
