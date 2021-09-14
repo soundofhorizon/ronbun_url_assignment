@@ -194,22 +194,41 @@
             <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
             <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
         </form>
+        <p id="check_frag"></p>
     </center>
 
     <script type="text/javascript">
-        var frag = true;
+        var frag = false;
+        let nameText_1 = document.getElementById('your_id');
+        let nameText_2 = document.getElementById('your_id_confirm');
+        let frag_check = document.getElementById('check_frag');
         function putRatio(){
             let elements = document.getElementsByName('howmany');
-            if (elements.item(0).checked && frag){
-                document.getElementById("url_assignment_button").style.display ="block";
-            }else if(elements.item(1).checked && frag){
-                document.getElementById("url_assignment_button").style.display ="block";
+            if (elements.item(0).checked){
+                if(frag){
+                    document.getElementById("url_assignment_button").style.display ="block";
+                }else{
+                    frag_check.innerText = "学籍番号が正しく入力されていません。確認の上再度送信してください。"
+                }
+            }else if(elements.item(1).checked){
+                if(frag){
+                    document.getElementById("url_assignment_button").style.display ="block";
+                }else{
+                    frag_check.innerText = "学籍番号が正しく入力されていません。確認の上再度送信してください。"
+                }
+            }
+        }
+        function buttonfrag_check(){
+            if(nameText_1.value != ""&&nameText_1.value==nameText_2.value){
+                frag = true;
             }
         }
         let elements1 = document.getElementById('onetime');
         let elements2 = document.getElementById('twotime');
         elements1.addEventListener('change', putRatio);
         elements2.addEventListener('change', putRatio);
+        nameText_1.addEventListener('change', buttonfrag_check);
+        nameText_2.addEventListener('change', buttonfrag_check);
     </script>
 </body>
 </html>
