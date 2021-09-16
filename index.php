@@ -4,17 +4,6 @@
     <title>URL Assignment System</title>
         <?php
             function main(){
-                if(isset($_POST['your_id'])&&isset($_POST["your_id_confirm"])){
-                    if($_POST['your_id'] != $_POST["your_id_confirm"]){
-                        $alert = "<script type='text/javascript'>alert('学籍番号が不一致です！再度確認してください。');</script>";
-                        echo $alert;
-                        return;
-                    }
-                }else{
-                    $alert = "<script type='text/javascript'>alert('学籍番号が入力されていません！再度確認してください。');</script>";
-                    echo $alert;
-                    return;
-                }
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
 
                     $conn = pg_connect(getenv("DATABASE_URL"));
