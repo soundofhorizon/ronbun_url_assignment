@@ -72,7 +72,7 @@
                                 }
                             }else{
                                 // '""'の要素は削除
-                                unset($single_query_result[0]);
+                                unset(array_shift($single_query_result));
                                 $pick_url = $single_query_result[0];
                                 var_dump($pick_url);
                                 unset($single_query_result[0]);
@@ -189,7 +189,7 @@
         </form>
         <p id="check_frag"></p>
         <?php if($frag){
-                echo("メールを送信しました。");
+                echo("<p>メールを送信しました。</p>");
               }
         ?>
     </center>
