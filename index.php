@@ -4,7 +4,6 @@
     <title>URL Assignment System</title>
         <?php
             header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
-            header("Cache-Control:pre-check=0,post-check=0,false");
             header("Pragma:no-cache");
             function main(){
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
@@ -141,6 +140,7 @@
                     }
                     $single_update_sql = rtrim($single_update_sql, ",");
                     $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_update_sql . "];";
+                    console.log($single_sql);
                     $package_update_sql = "";
                     for($i = 0; $i < count($package_query_result); $i++){
                         $package_update_sql .= "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "'],";
