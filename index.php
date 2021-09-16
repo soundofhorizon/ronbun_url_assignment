@@ -3,6 +3,9 @@
     <meta charset="UTF-8">
     <title>URL Assignment System</title>
         <?php
+            header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
+            header("Cache-Control:pre-check=0",post-check=0,false);
+            header("Pragma:no-cache");
             function main(){
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
 
@@ -154,9 +157,6 @@
                     }
                     var_dump($package_sql);
                     var_dump($single_sql);
-                }else{
-                    $alert = "<script type='text/javascript'>alert('単位数を選択してください。');</script>";
-                    echo $alert;
                 }
             }
             main();
