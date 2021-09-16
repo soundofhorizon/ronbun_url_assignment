@@ -6,6 +6,7 @@
             header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
             header("Pragma:no-cache");
             function main(){
+                $frag = false;
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
 
                     $conn = pg_connect(getenv("DATABASE_URL"));
@@ -158,6 +159,7 @@
                     }
                     var_dump($package_sql);
                     var_dump($single_sql);
+                    $frag = true;
                 }
             }
             main();
@@ -186,6 +188,10 @@
             <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
         </form>
         <p id="check_frag"></p>
+        <?php if($frag){
+                echo("メールを送信しました。");
+              }
+        ?>
     </center>
 
     <script type="text/javascript">
