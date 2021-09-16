@@ -171,7 +171,8 @@
         <p>※受ける実験の数で1つを選択した場合、<font color="red">さらに1つ実験を受けることはできません。</font></p>
         <hr>
         <br>
-        <form action="index.php" method="post">
+        <!-- <form action="index.php" method="post"> -->
+        <form>
             <p>学籍番号を入力してください。</p>
             <input type="text" id="myText" name="your_id" placeholder="学籍番号を入力してください。"><br>
             <hr>
