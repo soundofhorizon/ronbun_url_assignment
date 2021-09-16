@@ -4,7 +4,7 @@
     <title>URL Assignment System</title>
         <?php
             header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
-            header("Cache-Control:pre-check=0",post-check=0,false);
+            header("Cache-Control:pre-check=0,post-check=0,false");
             header("Pragma:no-cache");
             function main(){
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
