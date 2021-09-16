@@ -176,14 +176,15 @@
 <body>
     <center>
         <p>取り組んでいただく教材へのURLを発行するためのプログラムです。</p>
-        <p>選択した数のURLが発行され、そのURLが記載されたファイルがpdf形式でダウンロードされます。</p>
-        <p>ダウンロードされたファイルを開き、その後の作業を進めてください。</p>
-        <p>実験は2つまで受けることが可能です。受ける実験の数で1つを選択した場合、さらに1つ実験を受けることはできません。</p>
+        <p>選択した数のURLが発行され、そのURLが記載されたメールが、記載された学籍番号のメールに送信されます。</p>
+        <p>メールに添付されたURLを開き、その後の作業を進めてください。</p>
+        <p>実験は2つまで受けることが可能です。</p>
+        <p>※受ける実験の数で1つを選択した場合、<font color="red">さらに1つ実験を受けることはできません。</font></p>
         <hr>
         <br>
         <form action="index.php" method="post">
             <p>学籍番号を入力してください。</p>
-            <input type="text" id="myText1" name="your_id" placeholder="学籍番号を入力してください。"><br>
+            <input type="text" id="myText" name="your_id" placeholder="学籍番号を入力してください。"><br>
             <hr>
             <p>確認の為、再度学籍番号を入力してください。</p>
             <input type="text" id="myText2" name="your_id_confirm" placeholder="再度、学籍番号を入力してください。"><br>
@@ -199,27 +200,29 @@
 
     <script type="text/javascript">
         var frag = false;
-        let nameText_1 = document.getElementById('MyText1');
-        let nameText_2 = document.getElementById('MyText2');
         let frag_check = document.getElementById('check_frag');
         function putRatio(){
+            document.getElementById("check_frag").style.display = "block";
             let elements = document.getElementsByName('howmany');
             if (elements.item(0).checked){
                 if(frag){
                     document.getElementById("url_assignment_button").style.display ="block";
+                    document.getElementById("check_frag").style.display = "none";
                 }else{
                     frag_check.innerText = "学籍番号が正しく入力されていません。確認の上再度送信してください。"
                 }
             }else if(elements.item(1).checked){
                 if(frag){
                     document.getElementById("url_assignment_button").style.display ="block";
+                    document.getElementById("check_frag").style.display = "none";
                 }else{
                     frag_check.innerText = "学籍番号が正しく入力されていません。確認の上再度送信してください。"
                 }
             }
         }
         function buttonfrag_check(){
-            if(nameText_1.value != ""&&nameText_1.value==nameText_2.value){
+            document.getElementById("check_frag").style.display = "none";
+            if(nameText_1.value==nameText_2.value){
                 frag = true;
             }
         }
@@ -227,8 +230,10 @@
         let elements2 = document.getElementById('twotime');
         elements1.addEventListener('change', putRatio);
         elements2.addEventListener('change', putRatio);
-        nameText_1?.addEventListener('change', buttonfrag_check);
-        nameText_2?.addEventListener('change', buttonfrag_check);
+        let nameText_1 = document.getElementById('myText');
+        let nameText_2 = document.getElementById('myText2');
+        nameText_1.oninput = buttonfrag_check;
+        nameText_2.oninput = buttonfrag_check;
     </script>
 </body>
 </html>
