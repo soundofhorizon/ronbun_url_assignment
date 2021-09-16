@@ -140,7 +140,8 @@
                     }
                     $single_update_sql = rtrim($single_update_sql, ",");
                     $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_update_sql . "];";
-                    console.log($single_sql);
+                    $alert = "<script type='text/javascript'>alert($single_sql);</script>";
+                    echo $alert;
                     $package_update_sql = "";
                     for($i = 0; $i < count($package_query_result); $i++){
                         $package_update_sql .= "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "'],";
