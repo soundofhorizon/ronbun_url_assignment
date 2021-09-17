@@ -72,6 +72,7 @@
                                 }
                             }else{
                                 // '""'の要素は削除
+                                var_dump($single_query_result);
                                 $single_query_result = array_shift($single_query_result);
                                 $pick_url = $single_query_result[0];
                                 var_dump($pick_url);
@@ -141,7 +142,7 @@
                     }
                     $single_update_sql = rtrim($single_update_sql, ",");
                     $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_update_sql . "];";
-                    $alert = "<script type='text/javascript'>alert($single_sql);</script>";
+                    $alert = "<script type='text/javascript'>alert( " . $single_sql . ");</script>";
                     echo $alert;
                     $package_update_sql = "";
                     for($i = 0; $i < count($package_query_result); $i++){
