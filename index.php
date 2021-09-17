@@ -105,7 +105,7 @@
                              // 最初の要素を削除
                             unset($package_query_result[0]);
                             var_dump($package_query_result);
-                            $index = rand(0, count($package_query_result));
+                            $index = rand(0, count($package_query_result)-1);
                             $pick_url = $package_query_result[$index];
                             unset($package_query_result[$index]);
                             array_unshift($package_query_result, array("first", "endpoint"));
