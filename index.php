@@ -104,11 +104,12 @@
                         case 2:
                              // 最初の要素を削除
                             unset($package_query_result[0]);
-                            var_dump($package_query_result);
                             $index = rand(0, count($package_query_result)-1);
                             $pick_url = $package_query_result[$index];
                             unset($package_query_result[$index]);
+                            var_dump($package_query_result);
                             array_unshift($package_query_result, array("first", "endpoint"));
+                            var_dump($package_query_result);
                             $context = "2単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
                             $context .= $pick_url[0];
                             $context .= "-home.html?\n\n-2-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
