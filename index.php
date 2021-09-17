@@ -5,7 +5,6 @@
         <?php
             header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
             header("Pragma:no-cache");
-            $description = "";
             function main(){
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
 
@@ -37,7 +36,8 @@
                             if(count($single_query_result) == 1){
                                 // package_query_resultに、Queryが残っているかチェック
                                 if(count($package_query_result) == 1){
-                                    $description = "実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。";
+                                    echo '<script type="text/javascript">alert("実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。");</script>';
+                                    return;
                                 }else{
                                     // package_query_resultの最後の要素をunpack
                                     // 今回発行しないほうをsingleに追加
@@ -131,7 +131,8 @@
                                     }
                                 }
                             }else{
-                                $description = "2実験分のセットが無くなりました。申し訳ありませんが、1実験分で再度申請してください。";
+                                echo '<script type="text/javascript">alert("2実験分のセットが無くなりました。申し訳ありませんが、1実験分で再度申請してください。");</script>';
+                                return;
                             }
                             break;
 
@@ -157,7 +158,8 @@
                     if (!$result_flag_package) {
                         die('Package INSERTクエリーが失敗しました。'.pg_last_error());
                     }
-                    $description = "メール送信が完了しました。";
+                    echo '<script type="text/javascript">alert("メールを送信しました。学内メールを確認してください。");</script>';
+                    return;
                 }
             }
             main();
