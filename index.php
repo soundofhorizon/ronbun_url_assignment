@@ -188,7 +188,7 @@
             <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
         </form>
         <p id="check_frag"></p>
-        <?php echo($description);?>
+        <?php var_dump($description);?>
     </center>
 
     <script type="text/javascript">
