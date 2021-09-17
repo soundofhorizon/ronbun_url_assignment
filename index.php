@@ -102,8 +102,9 @@
                                 break;
                             }
                         case 2:
-                             // '""'の要素は削除
+                             // 最初の要素を削除
                             unset($package_query_result[0]);
+                            var_dump($package_query_result);
                             $index = rand(0, count($package_query_result));
                             $pick_url = $package_query_result[$index];
                             unset($package_query_result[$index]);
