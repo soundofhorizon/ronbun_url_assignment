@@ -163,7 +163,6 @@
                 }
             }
             main();
-            var_dump($description);
         ?>
 </head>
 <body>
