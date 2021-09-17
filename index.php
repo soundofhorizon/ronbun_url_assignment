@@ -75,7 +75,7 @@
                                 $single_query_result = array_shift($single_query_result);
                                 $pick_url = $single_query_result[0];
                                 var_dump($pick_url);
-                                unset($single_query_result[0]);
+                                $single_query_result = array_shift($single_query_result);
                                 array_unshift($single_query_result, '"test"');
                                 $context = "1単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url;
