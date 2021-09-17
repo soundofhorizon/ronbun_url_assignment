@@ -31,12 +31,12 @@
 
                     // 単位数の選択によって分岐
                     $ratio_value = $_POST["howmany"];
+                    var_dump($package_query_result);
                     switch($ratio_value){
                         case 1:
                             // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
                             if(count($single_query_result) == 1){
                                 // package_query_resultに、Queryが残っているかチェック
-
                                 if(count($package_query_result) == 1){
                                     $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
                                     echo $alert;
@@ -143,8 +143,6 @@
                     }
                     $single_update_sql = rtrim($single_update_sql, ",");
                     $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_update_sql . "];";
-                    $alert = "<script type='text/javascript'>alert( " . $single_sql . ");</script>";
-                    echo $alert;
                     $package_update_sql = "";
                     for($i = 0; $i < count($package_query_result); $i++){
                         $package_update_sql .= "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "'],";
@@ -159,8 +157,6 @@
                     if (!$result_flag_package) {
                         die('Package INSERTクエリーが失敗しました。'.pg_last_error());
                     }
-                    var_dump($package_sql);
-                    var_dump($single_sql);
                     $frag = true;
                 }
             }
