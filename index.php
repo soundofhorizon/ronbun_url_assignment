@@ -5,8 +5,8 @@
         <?php
             header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
             header("Pragma:no-cache");
+            $description = "";
             function main(){
-                $frag = false;
                 if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
 
                     $conn = pg_connect(getenv("DATABASE_URL"));
@@ -29,7 +29,7 @@
 
                     $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
 
-                    // 単位数の選択によって分岐
+                    // 実験数の選択によって分岐
                     $ratio_value = $_POST["howmany"];
                     var_dump($package_query_result);
                     switch($ratio_value){
@@ -38,9 +38,7 @@
                             if(count($single_query_result) == 1){
                                 // package_query_resultに、Queryが残っているかチェック
                                 if(count($package_query_result) == 1){
-                                    $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
-                                    echo $alert;
-                                    break;
+                                    $description = "実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。";
                                 }else{
                                     // package_query_resultの最後の要素をunpack
                                     // 今回発行しないほうをsingleに追加
@@ -48,7 +46,7 @@
                                     // unpackした要素を削除
                                     unset($package_query_result[count($package_query_result)-1]);
                                     $pick_url = end($package_query_result)[1];
-                                    $context = "1単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
+                                    $context = "1実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                     $context .= $pick_url;
                                     $context .= "-home.html?";
                                     //学籍番号へメール送信
@@ -57,7 +55,7 @@
 
                                        $email = new \SendGrid\Mail\Mail();
                                        $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
-                                       $email->setSubject("実験アクセス用URL記述メール-1単位");
+                                       $email->setSubject("実験アクセス用URL記述メール-1実験分");
                                        $to = $_POST["your_id"];
                                        $to .= "@bunkyo.ac.jp";
                                        $email->addTo($to, "参加者様");
@@ -79,7 +77,7 @@
                                 var_dump($pick_url);
                                 $single_query_result = array_shift($single_query_result);
                                 array_unshift($single_query_result, '"test"');
-                                $context = "1単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
+                                $context = "1実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url;
                                 $context .= "-home.html?";
                                 //学籍番号へメール送信
@@ -88,7 +86,7 @@
 
                                     $email = new \SendGrid\Mail\Mail();
                                     $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
-                                    $email->setSubject("実験アクセス用URL記述メール-1単位");
+                                    $email->setSubject("実験アクセス用URL記述メール-1実験分");
                                     $to = $_POST["your_id"];
                                     $to .= "@bunkyo.ac.jp";
                                     $email->addTo($to, "参加者様");
@@ -104,34 +102,38 @@
                             }
                         case 2:
                              // 最初の要素を削除
-                            unset($package_query_result[0]);
-                            $index = rand(0, count($package_query_result)-1);
-                            $pick_url = $package_query_result[$index];
-                            unset($package_query_result[$index]);
-                            array_unshift($package_query_result, array("first", "endpoint"));
-                            $context = "2単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
-                            $context .= $pick_url[0];
-                            $context .= "-home.html?\n\n-2-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
-                            $context .= $pick_url[1];
-                            $context .= "-home.html?";
+                            if(count($package_query_result) != 1){
+                                unset($package_query_result[0]);
+                                $index = rand(0, count($package_query_result)-1);
+                                $pick_url = $package_query_result[$index];
+                                unset($package_query_result[$index]);
+                                array_unshift($package_query_result, array("first", "endpoint"));
+                                $context = "2実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
+                                $context .= $pick_url[0];
+                                $context .= "-home.html?\n\n-2-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
+                                $context .= $pick_url[1];
+                                $context .= "-home.html?";
 
-                            //学籍番号へメール送信
-                            if(isset($_POST["url_assignment"])){
-                                require 'vendor/autoload.php';
+                                //学籍番号へメール送信
+                                if(isset($_POST["url_assignment"])){
+                                    require 'vendor/autoload.php';
 
-                                $email = new \SendGrid\Mail\Mail();
-                                $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
-                                $email->setSubject("実験アクセス用URL記述メール-2単位");
-                                $to = $_POST["your_id"];
-                                $to .= "@bunkyo.ac.jp";
-                                $email->addTo($to, "参加者様");
-                                $email->addContent("text/plain", $context);
-                                $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-                                try {
-                                    $response = $sendgrid->send($email);
-                                } catch (Exception $e) {
-                                    echo 'Caught exception: '. $e->getMessage() ."\n";
+                                    $email = new \SendGrid\Mail\Mail();
+                                    $email->setFrom("b9p31013@bunkyo.ac.jp", "大柴雅基");
+                                    $email->setSubject("実験アクセス用URL記述メール-2実験分");
+                                    $to = $_POST["your_id"];
+                                    $to .= "@bunkyo.ac.jp";
+                                    $email->addTo($to, "参加者様");
+                                    $email->addContent("text/plain", $context);
+                                    $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+                                    try {
+                                        $response = $sendgrid->send($email);
+                                    } catch (Exception $e) {
+                                        echo 'Caught exception: '. $e->getMessage() ."\n";
+                                    }
                                 }
+                            }else{
+                                $description = "2実験分のセットが無くなりました。申し訳ありませんが、1実験分で再度申請してください。"
                             }
                             break;
 
@@ -157,7 +159,7 @@
                     if (!$result_flag_package) {
                         die('Package INSERTクエリーが失敗しました。'.pg_last_error());
                     }
-                    $frag = true;
+                    $description = "メール送信が完了しました。";
                 }
             }
             main();
@@ -179,10 +181,10 @@
             <p>確認の為、再度学籍番号を入力してください。</p>
             <input type="text" id="myText2" name="your_id_confirm" placeholder="再度、学籍番号を入力してください。"><br>
             <hr>
-            <p>取り組むことができる単位数を選択してください。</p>
+            <p>取り組むことができる実験数を選択してください。</p>
             <br><br>
-            <label><input type="radio" name="howmany" value="1" id="onetime">1単位</label>
-            <label><input type="radio" name="howmany" value="2" id="twotime">2単位</label>
+            <label><input type="radio" name="howmany" value="1" id="onetime">1実験</label>
+            <label><input type="radio" name="howmany" value="2" id="twotime">2実験</label>
             <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
         </form>
         <p id="check_frag"></p>
