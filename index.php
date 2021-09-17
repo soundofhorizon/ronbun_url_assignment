@@ -36,7 +36,8 @@
                             // single_query_resultのlengthが1 -> single_queryに何もない。package_query_resultの最後からunpackして追加する。
                             if(count($single_query_result) == 1){
                                 // package_query_resultに、Queryが残っているかチェック
-                                if(in_array("first", end($package_query_result))){
+
+                                if(in_array("first", end($package_query_result), true)){
                                     $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
                                     echo $alert;
                                     break;
@@ -107,9 +108,7 @@
                             $index = rand(0, count($package_query_result)-1);
                             $pick_url = $package_query_result[$index];
                             unset($package_query_result[$index]);
-                            var_dump($package_query_result);
                             array_unshift($package_query_result, array("first", "endpoint"));
-                            var_dump($package_query_result);
                             $context = "2単位分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
                             $context .= $pick_url[0];
                             $context .= "-home.html?\n\n-2-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
