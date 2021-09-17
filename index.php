@@ -188,10 +188,7 @@
             <input type="submit" id="url_assignment_button" name="url_assignment" onclick="URLassignment()" style="display: none;" value="URL発行" />
         </form>
         <p id="check_frag"></p>
-        <?php if($frag){
-                echo("<p>メールを送信しました。</p>");
-              }
-        ?>
+        <?php echo($description);?>
     </center>
 
     <script type="text/javascript">
