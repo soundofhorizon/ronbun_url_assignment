@@ -72,7 +72,7 @@
                                 }
                             }else{
                                 // '""'の要素は削除
-                                $single_query_result = array_shift($single_query_result[0]);
+                                $single_query_result = array_shift($single_query_result);
                                 $pick_url = $single_query_result[0];
                                 var_dump($pick_url);
                                 unset($single_query_result[0]);
