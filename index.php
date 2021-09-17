@@ -37,7 +37,7 @@
                             if(count($single_query_result) == 1){
                                 // package_query_resultに、Queryが残っているかチェック
 
-                                if(in_array("first", end($package_query_result), true)){
+                                if(count($package_query_result) == 1){
                                     $alert = "<script type='text/javascript'>alert('実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。');</script>";
                                     echo $alert;
                                     break;
