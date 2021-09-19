@@ -36,7 +36,7 @@
                             if(count($single_query_result) == 1){
                                 // package_query_resultに、Queryが残っているかチェック
                                 if(count($package_query_result) == 1){
-                                    echo '<script type="text/javascript">alert("実験の総数が規定を満たした為、現在発行できるURLがありません！申し訳ございません。");</script>';
+                                    echo '<script type="text/javascript">alert("実験の総数が規定を満たした為、現在発行できるURLがありません！\n申し訳ございません。");</script>';
                                     return;
                                 }else{
                                     // package_query_resultの最後の要素をunpack
@@ -130,7 +130,7 @@
                                     }
                                 }
                             }else{
-                                echo '<script type="text/javascript">alert("2実験分のセットが無くなりました。申し訳ありませんが、1実験分で再度申請してください。");</script>';
+                                echo '<script type="text/javascript">alert("2実験分のセットが無くなりました。\n申し訳ありませんが、1実験分で再度申請してください。");</script>';
                                 return;
                             }
                             break;
