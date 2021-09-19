@@ -157,7 +157,7 @@
                     if (!$result_flag_package) {
                         die('Package INSERTクエリーが失敗しました。'.pg_last_error());
                     }
-                    echo '<script type="text/javascript">alert("メールを送信しました。学内メールを確認してください。");</script>';
+                    echo '<script type="text/javascript">alert("' . $_POST["your_id"] . '@bunkyo.ac.jpへメールを送信しました。確認し、実験を進めてください。");</script>';
                     return;
                 }
             }
