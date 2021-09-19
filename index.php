@@ -101,7 +101,8 @@
                              // 最初の要素を削除
                             if(count($package_query_result) != 1){
                                 unset($package_query_result[0]);
-                                var_dump($package_query_result);
+                                //要素番号がずれているのでここで整列
+                                array_values($package_query_result);
                                 $pick_url = $package_query_result[count($package_query_result)-1];
                                 unset($package_query_result[count($package_query_result)-1]);
                                 array_unshift($package_query_result, array("first", "endpoint"));
