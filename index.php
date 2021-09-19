@@ -35,7 +35,7 @@
                     $accepted_student_number_result = explode("," , substr($accepted_student_number_result, 1, strlen($accepted_student_number_result)-2));
 
                     //既に一度でもURLの申請がされてたらreturn
-                    if in_array($_POST["your_id"], $accepted_student_number_result){
+                    if(in_array($_POST["your_id"], $accepted_student_number_result)){
                         echo '<script type="text/javascript">alert("貴方は実験に既に参加済みです。学内メールを確認してください。\nメールが届いていない場合はb9p31013@bunkyo.ac.jpまで連絡を下さい。");</script>';
                         return;
                     }
