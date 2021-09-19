@@ -39,6 +39,8 @@
                         echo '<script type="text/javascript">alert("貴方は実験に既に参加済みです。学内メールを確認してください。\nメールが届いていない場合はb9p31013@bunkyo.ac.jpまで連絡を下さい。");</script>';
                         return;
                     }
+                    // 学籍番号を登録
+                    array_push($accepted_student_number_result, $_POST["your_id"]);
 
                     // 実験数の選択によって分岐
                     $ratio_value = $_POST["howmany"];
@@ -163,7 +165,7 @@
                     }
                     $package_update_sql = rtrim($package_update_sql, ",");
                     $package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" . $package_update_sql . "];";
-
+                    var_dump(accepted_student_number_result);
                     $accepted_student_number_sql = "";
                     for($i = 0; $i < count($accepted_student_number_result); $i++){
                         $accepted_student_number_sql .= "'" . $accepted_student_number_result[$i] . "',";
