@@ -6,7 +6,7 @@
             header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
             header("Pragma:no-cache");
             function main(){
-                if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])){
+                if(isset($_POST['howmany'])&&isset($_POST["url_assignment"])&&isset($_POST["your_id"])){
 
                     $conn = pg_connect(getenv("DATABASE_URL"));
                     // SQLで情報を取得
@@ -18,6 +18,10 @@
                     while ($row = pg_fetch_row($single_query)) {
                         $single_query_result = $row[0];
                     }
+                    $accepted_student_number = pg_query($conn, "select student_number from accepted_student_number;");
+                    while ($row = pg_fetch_row($accepted_student_number)) {
+                        $accepted_student_number_result = $row[0];
+                    }
 
                     //ここで取得したQueryはString表記なのでArrayにする。
                     $package_query_result = explode("},{",substr($package_query_result, 2, strlen($package_query_result)-4));
@@ -27,6 +31,14 @@
                     }
 
                     $single_query_result = explode("," , substr($single_query_result, 1, strlen($single_query_result)-2));
+
+                    $accepted_student_number_result = explode("," , substr($accepted_student_number_result, 1, strlen($accepted_student_number_result)-2));
+
+                    //既に一度でもURLの申請がされてたらreturn
+                    if in_array($_POST["your_id"], $accepted_student_number_result){
+                        echo '<script type="text/javascript">alert("貴方は実験に既に参加済みです。学内メールを確認してください。\nメールが届いていない場合はb9p31013@bunkyo.ac.jpまで連絡を下さい。");</script>';
+                        return;
+                    }
 
                     // 実験数の選択によって分岐
                     $ratio_value = $_POST["howmany"];
@@ -137,27 +149,44 @@
                             break;
 
                     }
-                    // UPDATE SQL
+                    // UPDATE SQL文の生成
                     $single_update_sql = "";
                     for($i = 0; $i < count($single_query_result); $i++){
                         $single_update_sql .= "'" . $single_query_result[$i] . "',";
                     }
                     $single_update_sql = rtrim($single_update_sql, ",");
                     $single_sql = "UPDATE url_assignment SET Single_query=ARRAY[" . $single_update_sql . "];";
+
                     $package_update_sql = "";
                     for($i = 0; $i < count($package_query_result); $i++){
                         $package_update_sql .= "ARRAY['" . $package_query_result[$i][0] . "','" . $package_query_result[$i][1] . "'],";
                     }
                     $package_update_sql = rtrim($package_update_sql, ",");
                     $package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" . $package_update_sql . "];";
+
+                    $accepted_student_number_sql = "";
+                    for($i = 0; $i < count($accepted_student_number_result); $i++){
+                        $accepted_student_number_sql .= "'" . $accepted_student_number_result[$i] . "',";
+                    }
+                    $accepted_student_number_sql = rtrim($accepted_student_number_sql, ",");
+                    $student_number_sql = "UPDATE accepted_student_number SET student_number=ARRAY[" . $accepted_student_number_sql . "];";
+
+                    //各種SQL文を命令
                     $result_flag_single = pg_query($single_sql);
                     if (!$result_flag_single) {
                         die('Single INSERTクエリーが失敗しました。'.pg_last_error());
                     }
+
                     $result_flag_package = pg_query($package_sql);
                     if (!$result_flag_package) {
                         die('Package INSERTクエリーが失敗しました。'.pg_last_error());
                     }
+
+                    $result_flag_student_number = pg_query($student_number_sql);
+                    if (!$result_flag_student_number) {
+                        die('Student Number INSERTクエリーが失敗しました。'.pg_last_error());
+                    }
+
                     echo '<script type="text/javascript">alert("' . $_POST["your_id"] . '@bunkyo.ac.jpへメールを送信しました。確認し、実験を進めてください。");</script>';
                     return;
                 }
