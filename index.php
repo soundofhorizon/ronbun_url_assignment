@@ -165,7 +165,7 @@
                     }
                     $package_update_sql = rtrim($package_update_sql, ",");
                     $package_sql = "UPDATE url_assignment SET Package_query=ARRAY[" . $package_update_sql . "];";
-                    var_dump(accepted_student_number_result);
+                    var_dump($accepted_student_number_result);
                     $accepted_student_number_sql = "";
                     for($i = 0; $i < count($accepted_student_number_result); $i++){
                         $accepted_student_number_sql .= "'" . $accepted_student_number_result[$i] . "',";
