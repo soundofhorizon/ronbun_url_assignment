@@ -59,7 +59,7 @@
                                     $pick_url = end($package_query_result)[1];
                                     // unpackした要素を削除
                                     unset($package_query_result[count($package_query_result)-1]);
-                                    $context = "1実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n※必ず、実験はパソコンを用いて参加してください。スマホやタブレットを用いないでください。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
+                                    $context = "1実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n※必ず、実験はパソコンで行ってください。スマホやタブレットを用いないでください。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                     $context .= $pick_url;
                                     $context .= "-home.html?";
                                     //学籍番号へメール送信
@@ -88,7 +88,7 @@
                                 $pick_url = $single_query_result[0];
                                 $single_query_shifted = array_shift($single_query_result);
                                 array_unshift($single_query_result, "test");
-                                $context = "1実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n※必ず、実験はパソコンを用いて参加してください。スマホやタブレットを用いないでください。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
+                                $context = "1実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n※必ず、実験はパソコンで行ってください。スマホやタブレットを用いないでください。\n\n----------------------------\n\n 1: https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url;
                                 $context .= "-home.html?";
                                 //学籍番号へメール送信
@@ -120,7 +120,7 @@
                                 $pick_url = $package_query_result[count($package_query_result)-1];
                                 unset($package_query_result[count($package_query_result)-1]);
                                 array_unshift($package_query_result, array("first", "endpoint"));
-                                $context = "2実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n※必ず、実験はパソコンを用いて参加してください。スマホやタブレットを用いないでください。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
+                                $context = "2実験分の実験参加用のURLです。Google Chromeにて以下のURLからアクセスして下さい。\n※発行された分の実験は必ず行うようにしてください。実験時間は各URL毎30分が想定されています。\n※必ず、実験はパソコンで行ってください。スマホやタブレットを用いないでください。\n\n----------------------------\n\n\n -1-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url[0];
                                 $context .= "-home.html?\n\n-2-\n\n https://soundofhorizon.github.io/ronbun-homepage/";
                                 $context .= $pick_url[1];
@@ -204,6 +204,7 @@
         <p>メールに添付されたURLを開き、その後の作業を進めてください。</p>
         <p>実験は2つまで受けることが可能です。</p>
         <p>※受ける実験の数で1つを選択した場合、<font color="red">さらに1つ実験を受けることはできません。</font></p>
+        <p>※実験期間が終了すると、発行されたURLは無効になります。</p>
         <hr>
         <br>
         <form action="index.php" method="post">
